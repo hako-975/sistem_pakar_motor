@@ -15,7 +15,7 @@
 <html lang="en"> <!--begin::Head-->
 
 <head>
-    <title>Sistem Pendukung Keputusan Jurusan Kuliah Pada SMK</title>
+    <title>Sistem Pakar Motor</title>
     <?php include_once 'include/head.php'; ?>
 </head> <!--end::Head--> <!--begin::Body-->
 
@@ -77,7 +77,7 @@
                 <div class="text-center">
                     <img src="assets/img/properties/logo.png" class="mx-auto w-50 my-2" alt="Logo">
                 </div>
-                <h5 class="text-center">Sistem Pendukung Keputusan <br> Jurusan Kuliah Pada SMK</h5>
+                <h3 class="text-center">Sistem Pakar Motor</h3>
             </div>
             <div class="card-body login-card-body pb-0 pt-2">
                 <h5 class="text-dark text-center">User Login</h5>
@@ -94,6 +94,9 @@
                         <div class="input-group-text"> <span class="fas fa-fw fa-lock"></span> </div>
                     </div> <!--begin::Row-->
                     <div class="row mt-3">
+                        <div class="col text-start my-auto">
+                            <a href="registrasi.php">Registrasi</a>
+                        </div> <!-- /.col -->
                         <div class="col text-end">
                             <button type="submit" name="btnLogin" class="btn btn-primary">Login <span class="fas fa-fw fa-sign-in-alt"></span></button>
                         </div> <!-- /.col -->
@@ -101,7 +104,7 @@
                 </form>
             </div> 
             <div class="card-footer">
-                <p class="m-0 p-0">Copyright &copy; 2025 Haus Coding.</p>
+                <p class="m-0 p-0">Copyright &copy; 2025 Sistem Pakar Motor.</p>
             </div>
         </div>
     </div> <!-- /.login-box --> <!--begin::Third Party Plugin(OverlayScrollbars)-->

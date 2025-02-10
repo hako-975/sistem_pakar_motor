@@ -18,6 +18,8 @@
     <?php 
         if (isset($_POST['btnUbahProfile'])) {
             $nama = htmlspecialchars($_POST['nama']);
+            $jenis_kelamin = htmlspecialchars($_POST['jenis_kelamin']);
+            $alamat = htmlspecialchars($_POST['alamat']);
             $foto = $dataUser['foto'];
         
             $foto_new = $_FILES['foto']['name'];
@@ -77,7 +79,7 @@
             }
 
             $id_user = $dataUser['id_user'];
-            $update_profile = mysqli_query($conn, "UPDATE user SET nama = '$nama', foto = '$foto' WHERE id_user = '$id_user'");
+            $update_profile = mysqli_query($conn, "UPDATE user SET nama = '$nama', jenis_kelamin = '$jenis_kelamin', alamat = '$alamat', foto = '$foto' WHERE id_user = '$id_user'");
 
             if ($update_profile) {
                 $log_berhasil = mysqli_query($conn, "INSERT INTO log VALUES ('', 'Profile berhasil diperbaharui!', CURRENT_TIMESTAMP(), " . $dataUser['id_user'] . ")");
@@ -163,6 +165,22 @@
                                         <div class="mb-3"> 
                                             <label for="nama" class="form-label">Nama</label> 
                                             <input type="text" class="form-control" id="nama" name="nama" value="<?= $dataUser['nama']; ?>" required>
+                                        </div>
+                                        <div class="mb-3"> 
+                                            <label for="jenis_kelamin" class="form-label">Jenis Kelamin</label>
+                                            <select id="jenis_kelamin" name="jenis_kelamin" class="form-control" required>
+                                                <?php if ($dataUser['jenis_kelamin'] == 'laki-laki'): ?>
+                                                    <option value="laki-laki">Laki-laki</option>
+                                                    <option value="perempuan">Perempuan</option>
+                                                <?php else: ?>
+                                                    <option value="perempuan">Perempuan</option>
+                                                    <option value="laki-laki">Laki-laki</option>
+                                                <?php endif ?>
+                                            </select>
+                                        </div>
+                                        <div class="mb-3"> 
+                                            <label for="alamat" class="form-label">Alamat</label> 
+                                            <textarea class="form-control" id="alamat" name="alamat" required><?= $dataUser['alamat']; ?></textarea>
                                         </div>
                                         <div class="mb-3">
                                             <label for="foto" class="form-label">Foto</label>

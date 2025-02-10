@@ -1,9 +1,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="title" content="Sistem Pendukung Keputusan Jurusan Kuliah Pada SMK">
-<meta name="author" content="Alivia Sabrina">
-<meta name="description" content="Sistem Pendukung Keputusan Jurusan Kuliah Pada SMK">
-<meta name="keywords" content="Sistem Pendukung Keputusan Jurusan Kuliah Pada SMK">
+<meta name="title" content="Sistem Pakar Motor">
+<meta name="author" content="Khairul Tulfah">
+<meta name="description" content="Sistem Pakar Motor">
+<meta name="keywords" content="Sistem Pakar Motor">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/source-sans-3@5.0.12/index.css" integrity="sha256-tXJfXfp6Ewt1ilPzLDtQnJV4hclT9XuaZUKyUvmyr+Q=" crossorigin="anonymous">
 

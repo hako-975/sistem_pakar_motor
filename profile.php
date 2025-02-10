@@ -11,7 +11,7 @@
 <html lang="en"> <!--begin::Head-->
 
 <head>
-    <title>Profile - Sistem Pendukung Keputusan Jurusan Kuliah Pada SMK</title>
+    <title>Profile - Sistem Pakar Motor</title>
     <?php include_once 'include/head.php'; ?>
     <style>
         .profile-card {
@@ -76,6 +76,8 @@
                         <h3 class="text-center"><?= $dataUser['nama']; ?></h3>
                         <p><strong>Username: </strong><?= $dataUser['username']; ?></p>
                         <p><strong>Jabatan: </strong><?= ucwords($dataUser['jabatan']); ?></p>
+                        <p><strong>Jenis Kelamin: </strong><?= ucwords($dataUser['jenis_kelamin']); ?></p>
+                        <p><strong>Alamat: </strong><?= $dataUser['alamat']; ?></p>
                         <p><strong>Dibuat Pada: </strong><?= date('d-m-Y, H:i:s', strtotime($dataUser['dibuat_pada']));; ?></p>
                         <div class="btn-group" role="group">
                             <a href="ubah_profile.php" class="btn btn-success"><i class="fas fa-fw fa-edit"></i> Ubah Profile</a>

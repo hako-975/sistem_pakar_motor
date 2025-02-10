@@ -5,19 +5,13 @@
         header("Location: login.php");
         exit;
     }
-
-    $jml_jurusan = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM jurusan"));
-    $jml_kriteria = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM kriteria"));
-    $jml_siswa = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM siswa"));
-    $jml_user = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM user"));
-    $jml_spk = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM hasil_topsis"));
 ?>
 
 <!DOCTYPE html>
 <html lang="en"> <!--begin::Head-->
 
 <head>
-    <title>Dashboard - Sistem Pendukung Keputusan Jurusan Kuliah Pada SMK</title>
+    <title>Dashboard - Sistem Pakar Motor</title>
     <?php include_once 'include/head.php'; ?>
 </head> <!--end::Head--> <!--begin::Body-->
 <body class="layout-fixed sidebar-expand-lg bg-body-tertiary"> <!--begin::App Wrapper-->
@@ -46,39 +40,18 @@
             <div class="app-content"> <!--begin::Container-->
                 <div class="container-fluid"> <!-- Info boxes -->
                     <div class="row">
-                        <div class="col-12 col-sm-6 col-md-3">
-                            <div class="info-box"> <span class="info-box-icon text-bg-success shadow-sm"> <i class="fas fa-fw fa-clipboard-list"></i> </span>
-                                <div class="info-box-content"> <span class="info-box-text">Jumlah Kriteria</span> 
-                                    <span class="info-box-number">
-                                        <?= $jml_kriteria; ?>
-                                    </span>
+                        <div class="col">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="m-0">Selamat datang, <?= $dataUser['username']; ?>!</h4>
+                                </div>
+                                <div class="card-body">
+                                    <h5>Sistem Pakar Deteksi Kerusakan Mesin Sepeda Motor</h5>
+                                    <p>Sistem Pakar Deteksi Kerusakan Mesin Sepeda Motor merupakan sistem berbasis website yang dirancang untuk membantu bengkel dalam mendiagnosis kerusakan mesin kendaraan secara cepat dan akurat.</p>
+                                    <p>Sebagai pemilik bengkel, penting untuk memiliki kewaspadaan yang tinggi terhadap berbagai jenis kerusakan yang dapat terjadi pada mesin sepeda motor. Untuk itu, adanya Sistem Pakar Deteksi Kerusakan Mesin Sepeda Motor yang menggunakan metode Case-Based Reasoning (CBR) dapat dijadikan salah satu solusi. Sistem ini mampu menganalisis dan mendeteksi kerusakan dengan perhitungan yang tepat, sehingga dapat membantu mekanik dalam memberikan layanan perbaikan yang lebih efisien dan profesional.</p>
+                                    <a href="" class="btn btn-primary"><i class="fas fa-fw fa-cogs"></i> Diagnosa Mesin</a>
                                 </div>
                             </div>
-                        </div> 
-                        <div class="col-12 col-sm-6 col-md-3">
-                            <div class="info-box"> <span class="info-box-icon text-bg-danger shadow-sm"> <i class="fas fa-fw fa-graduation-cap"></i> </span>
-                                <div class="info-box-content"> <span class="info-box-text">Jumlah Jurusan</span> 
-                                    <span class="info-box-number">
-                                        <?= $jml_jurusan; ?>
-                                    </span> </div>
-                            </div> <!-- /.info-box -->
-                        </div> <!-- /.col -->
-                        <div class="col-12 col-sm-6 col-md-3">
-                            <div class="info-box"> <span class="info-box-icon text-bg-primary shadow-sm"> <i class="fas fa-fw fa-users text-white"></i> </span>
-                                <div class="info-box-content"> <span class="info-box-text">Jumlah Siswa</span>
-                                    <span class="info-box-number"><?= $jml_siswa; ?></span>
-                                </div> <!-- /.info-box-content -->
-                            </div> <!-- /.info-box -->
-                        </div> <!-- /.col -->
-                        <div class="col-12 col-sm-6 col-md-3">
-                            <div class="info-box"> <span class="info-box-icon text-bg-warning shadow-sm"> <i class="fas fa-fw fa-user text-white"></i> </span>
-                                <div class="info-box-content"> <span class="info-box-text">Jumlah User</span> <span class="info-box-number"><?= $jml_user; ?></span> </div> <!-- /.info-box-content -->
-                            </div> <!-- /.info-box -->
-                        </div>
-                        <div class="col-12 col-sm-6 col-md-3">
-                            <div class="info-box"> <span class="info-box-icon text-bg-info shadow-sm"> <i class="fas fa-fw fa-calculator text-white"></i> </span>
-                                <div class="info-box-content"> <span class="info-box-text">Jumlah SPK</span> <span class="info-box-number"><?= $jml_spk; ?></span> </div> <!-- /.info-box-content -->
-                            </div> <!-- /.info-box -->
                         </div>
                     </div>
                 </div> <!--end::Container-->

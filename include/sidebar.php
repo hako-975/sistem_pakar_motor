@@ -9,50 +9,50 @@
     <div class="sidebar-brand border-primary border-bottom"> 
         <a href="index.php" class="brand-link"> 
             <img src="assets/img/properties/logo.png" alt="Logo" class="brand-image-xl">
-            <span class="brand-text fw-light text-dark small text-wrap">Sistem Pendukung Keputusan Jurusan Kuliah Pada SMK</span>
+            <span class="brand-text fw-light text-dark small text-wrap">Sistem Pakar Motor</span>
         </a> 
     </div>
     <div class="sidebar-wrapper">
         <nav class="mt-2"> <!--begin::Sidebar Menu-->
             <ul class="nav sidebar-menu flex-column" data-lte-toggle="treeview" role="menu" data-accordion="false">
                 <li class="nav-item"> 
-                    <a href="index.php" class="nav-link text-dark <?= ($_SERVER['REQUEST_URI'] == '/spk_jurusan_kuliah_pada_smk/index.php') ? 'active' : ''; ?>"> <i class="nav-icon fas fa-fw fa-tachometer-alt"></i>
+                    <a href="index.php" class="nav-link text-dark <?= ($_SERVER['REQUEST_URI'] == '/sistem_pakar_motor/index.php') ? 'active' : ''; ?>"> <i class="nav-icon fas fa-fw fa-tachometer-alt"></i>
                         <p>Dashboard</p>
                     </a>
                 </li>
                 <li class="nav-item"> 
-                    <a href="spk.php" class="nav-link text-dark <?= ($_SERVER['REQUEST_URI'] == '/spk_jurusan_kuliah_pada_smk/spk.php') ? 'active' : ''; ?>"> <i class="nav-icon fas fa-fw fa-calculator"></i>
-                        <p>SPK Jurusan</p>
+                    <a href="kerusakan_solusi.php" class="nav-link text-dark <?= ($_SERVER['REQUEST_URI'] == '/sistem_pakar_motor/kerusakan_solusi.php') ? 'active' : ''; ?>"> <i class="nav-icon fas fa-fw fa-x-ray"></i>
+                        <p>Kerusakan & Solusi</p>
                     </a> 
                 </li>
                 <li class="nav-item"> 
-                    <a href="kriteria.php" class="nav-link text-dark <?= ($_SERVER['REQUEST_URI'] == '/spk_jurusan_kuliah_pada_smk/kriteria.php') ? 'active' : ''; ?>"> <i class="nav-icon fas fa-fw fa-clipboard-list"></i>
-                        <p>Kriteria</p>
+                    <a href="gejala.php" class="nav-link text-dark <?= ($_SERVER['REQUEST_URI'] == '/sistem_pakar_motor/gejala.php') ? 'active' : ''; ?>"> <i class="nav-icon fas fa-fw fa-exclamation-triangle"></i>
+                        <p>Gejala</p>
                     </a> 
                 </li>
                 <li class="nav-item"> 
-                    <a href="jurusan.php" class="nav-link text-dark <?= ($_SERVER['REQUEST_URI'] == '/spk_jurusan_kuliah_pada_smk/jurusan.php') ? 'active' : ''; ?>"> <i class="nav-icon fas fa-fw fa-graduation-cap"></i>
-                        <p>Jurusan</p>
+                    <a href="relasi.php" class="nav-link text-dark <?= ($_SERVER['REQUEST_URI'] == '/sistem_pakar_motor/relasi.php') ? 'active' : ''; ?>"> <i class="nav-icon fas fa-fw fa-link"></i>
+                        <p>Relasi</p>
                     </a> 
                 </li>
                 <li class="nav-item"> 
-                    <a href="siswa.php" class="nav-link text-dark <?= ($_SERVER['REQUEST_URI'] == '/spk_jurusan_kuliah_pada_smk/siswa.php') ? 'active' : ''; ?>"> <i class="nav-icon fas fa-fw fa-users"></i>
-                        <p>Siswa</p>
-                    </a> 
+                    <a href="laporan_gejala.php" class="nav-link text-dark <?= ($_SERVER['REQUEST_URI'] == '/sistem_pakar_motor/laporan_gejala.php') ? 'active' : ''; ?>"> <i class="nav-icon fas fa-fw fa-file-alt"></i>
+                        <p>Laporan Gejala</p>
+                    </a>
                 </li>
                 <li class="nav-item"> 
-                    <a href="user.php" class="nav-link text-dark <?= ($_SERVER['REQUEST_URI'] == '/spk_jurusan_kuliah_pada_smk/user.php') ? 'active' : ''; ?>"> <i class="nav-icon fas fa-fw fa-user"></i>
+                    <a href="laporan_user.php" class="nav-link text-dark <?= ($_SERVER['REQUEST_URI'] == '/sistem_pakar_motor/laporan_user.php') ? 'active' : ''; ?>"> <i class="nav-icon fas fa-fw fa-file-alt"></i>
+                        <p>Laporan User</p>
+                    </a>
+                </li>
+                <li class="nav-item"> 
+                    <a href="user.php" class="nav-link text-dark <?= ($_SERVER['REQUEST_URI'] == '/sistem_pakar_motor/user.php') ? 'active' : ''; ?>"> <i class="nav-icon fas fa-fw fa-user"></i>
                         <p>User</p>
                     </a> 
                 </li>
-                <li class="nav-item"> 
-                    <a href="laporan.php" class="nav-link text-dark <?= ($_SERVER['REQUEST_URI'] == '/spk_jurusan_kuliah_pada_smk/laporan.php') ? 'active' : ''; ?>"> <i class="nav-icon fas fa-fw fa-file-alt"></i>
-                        <p>Laporan</p>
-                    </a>
-                </li>
                 <hr class="sidebar-divider">
                 <li class="nav-item"> 
-                    <a href="log.php" class="nav-link text-dark <?= ($_SERVER['REQUEST_URI'] == '/spk_jurusan_kuliah_pada_smk/log.php') ? 'active' : ''; ?>"> <i class="nav-icon fas fa-fw fa-history"></i>
+                    <a href="log.php" class="nav-link text-dark <?= ($_SERVER['REQUEST_URI'] == '/sistem_pakar_motor/log.php') ? 'active' : ''; ?>"> <i class="nav-icon fas fa-fw fa-history"></i>
                         <p>Log</p>
                     </a>
                 </li>

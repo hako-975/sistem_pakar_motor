@@ -5,7 +5,7 @@
 	$host = 'localhost';
 	$user = 'root';
 	$pass = '';
-	$database = 'spk_jurusan_kuliah_pada_smk';
+	$database = 'sistem_pakar_motor';
 
 	$conn = mysqli_connect($host, $user, $pass, $database);
 
