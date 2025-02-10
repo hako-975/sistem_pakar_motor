@@ -18,9 +18,9 @@
 
     $data_kerusakan_solusi = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM kerusakan_solusi WHERE kd_kerusakan = '$kd_kerusakan'"));
 
-	$delete_user = mysqli_query($conn, "DELETE FROM kerusakan_solusi WHERE kd_kerusakan = '$kd_kerusakan'");
+	$delete_kerusakan_solusi = mysqli_query($conn, "DELETE FROM kerusakan_solusi WHERE kd_kerusakan = '$kd_kerusakan'");
 
-	if ($delete_user) {
+	if ($delete_kerusakan_solusi) {
         $log_berhasil = mysqli_query($conn, "INSERT INTO log VALUES ('', 'Kerusakan & Solusi $kd_kerusakan berhasil dihapus!', CURRENT_TIMESTAMP(), " . $dataUser['id_user'] . ")");
 
 
