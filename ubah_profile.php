@@ -190,8 +190,8 @@
                                             </div>
                                         </div>
                                     </div> 
-                                    <div class="card-footer pt-3 text-end">
-                                        <button type="submit" name="btnUbahProfile" class="btn btn-primary"><i class="fas fa-fw fa-save"></i> Submit</button>
+                                    <div class="card-footer pt-3">
+                                        <button type="submit" name="btnUbahProfile" class="btn btn-primary">Submit</button>
                                     </div> 
                                 </form> <!--end::Form-->
                             </div>

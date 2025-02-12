@@ -141,8 +141,8 @@
                                             <input type="password" class="form-control" id="ulangi_password_baru" name="ulangi_password_baru" required>
                                         </div>
                                     </div> 
-                                    <div class="card-footer pt-3 text-end">
-                                        <button type="submit" name="btnGantiPassword" class="btn btn-primary"><i class="fas fa-fw fa-save"></i> Submit</button>
+                                    <div class="card-footer pt-3">
+                                        <button type="submit" name="btnGantiPassword" class="btn btn-primary">Submit</button>
                                     </div>
                                 </form> <!--end::Form-->
                             </div>

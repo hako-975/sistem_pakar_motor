@@ -6,7 +6,7 @@
         exit;
     }
 
-    if ($dataUser['jabatan'] == 'petugas') {
+    if ($dataUser['jabatan'] == 'pelanggan') {
         header("Location: index.php");
         exit;
     }

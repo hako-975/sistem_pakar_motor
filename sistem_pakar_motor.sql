@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 10 Feb 2025 pada 09.23
+-- Waktu pembuatan: 12 Feb 2025 pada 16.30
 -- Versi server: 10.4.27-MariaDB
 -- Versi PHP: 7.4.33
 
@@ -144,7 +144,21 @@ INSERT INTO `log` (`id_log`, `isi_log`, `tgl_log`, `id_user`) VALUES
 (24, 'User admin berhasil logout!', '2025-02-10 08:16:10', 1),
 (25, 'Kerusakan Solusi asd berhasil ditambahkan!', '2025-02-10 08:22:39', 1),
 (26, 'Kerusakan & Solusi asd berhasil diubah!', '2025-02-10 08:22:46', 1),
-(27, 'Kerusakan & Solusi asd berhasil dihapus!', '2025-02-10 08:22:49', 1);
+(27, 'Kerusakan & Solusi asd berhasil dihapus!', '2025-02-10 08:22:49', 1),
+(28, 'Gejala asd berhasil ditambahkan!', '2025-02-10 08:29:50', 1),
+(29, 'Gejala asd berhasil dihapus!', '2025-02-10 08:31:03', 1),
+(30, 'Gejala asd berhasil ditambahkan!', '2025-02-10 08:31:12', 1),
+(31, 'Gejala asd berhasil diubah!', '2025-02-10 08:33:24', 1),
+(32, 'Gejala asd berhasil diubah!', '2025-02-10 08:33:31', 1),
+(33, 'Gejala asd berhasil dihapus!', '2025-02-10 08:33:37', 1),
+(34, 'User admin berhasil logout!', '2025-02-10 12:27:13', 1),
+(35, 'User admin berhasil login!', '2025-02-11 11:52:47', 1),
+(36, 'User admin berhasil login!', '2025-02-12 13:05:17', 1),
+(37, 'Relasi KR01 | G03 berhasil ditambahkan!', '2025-02-12 13:26:26', 1),
+(38, 'Relasi berhasil dihapus!', '2025-02-12 15:20:32', 1),
+(39, 'Relasi  |  berhasil diubah!', '2025-02-12 15:29:29', 1),
+(40, 'Relasi KR01 | G01 berhasil diubah!', '2025-02-12 15:30:10', 1),
+(41, 'Relasi KR01 | G01 berhasil diubah!', '2025-02-12 15:30:16', 1);
 
 -- --------------------------------------------------------
 
@@ -368,13 +382,13 @@ ALTER TABLE `analisa_hasil`
 -- AUTO_INCREMENT untuk tabel `log`
 --
 ALTER TABLE `log`
-  MODIFY `id_log` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id_log` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT untuk tabel `relasi`
 --
 ALTER TABLE `relasi`
-  MODIFY `id_relasi` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
+  MODIFY `id_relasi` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
 
 --
 -- AUTO_INCREMENT untuk tabel `tmp_gejala`

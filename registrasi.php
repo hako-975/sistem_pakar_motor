@@ -29,6 +29,7 @@
             $ulangi_password = htmlspecialchars($_POST['ulangi_password']);
             $jenis_kelamin = htmlspecialchars($_POST['jenis_kelamin']);
             $alamat = htmlspecialchars($_POST['alamat']);
+            
             if ($jenis_kelamin == '0') {
                 echo "
                     <script>

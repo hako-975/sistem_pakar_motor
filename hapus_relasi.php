@@ -14,14 +14,12 @@
         exit;
     }
     
-	$kd_gejala = $_GET['kd_gejala'];
+	$id_relasi = $_GET['id_relasi'];
 
-    $data_gejala = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM gejala WHERE kd_gejala = '$kd_gejala'"));
+	$delete_relasi = mysqli_query($conn, "DELETE FROM relasi WHERE id_relasi = '$id_relasi'");
 
-	$delete_gejala = mysqli_query($conn, "DELETE FROM gejala WHERE kd_gejala = '$kd_gejala'");
-
-	if ($delete_gejala) {
-        $log_berhasil = mysqli_query($conn, "INSERT INTO log VALUES ('', 'Gejala $kd_gejala berhasil dihapus!', CURRENT_TIMESTAMP(), " . $dataUser['id_user'] . ")");
+	if ($delete_relasi) {
+        $log_berhasil = mysqli_query($conn, "INSERT INTO log VALUES ('', 'Relasi berhasil dihapus!', CURRENT_TIMESTAMP(), " . $dataUser['id_user'] . ")");
 
 
 		echo "
@@ -29,27 +27,27 @@
 	            Swal.fire({
 	                icon: 'success',
 	                title: 'Berhasil!',
-	                text: 'Gejala " . $kd_gejala . " berhasil dihapus!'
+	                text: 'Relasi berhasil dihapus!'
 	            }).then((result) => {
 	                if (result.isConfirmed) {
-	                    window.location.href = 'gejala.php';
+	                    window.location.href = 'relasi.php';
 	                }
 	            });
 	        </script>
 	    ";
 	    exit;
 	} else {
-        $log_gagal = mysqli_query($conn, "INSERT INTO log VALUES ('', 'Gejala $kd_gejala gagal dihapus!', CURRENT_TIMESTAMP(), " . $dataUser['id_user'] . ")");
+        $log_gagal = mysqli_query($conn, "INSERT INTO log VALUES ('', 'Relasi gagal dihapus!', CURRENT_TIMESTAMP(), " . $dataUser['id_user'] . ")");
 
 	    echo "
 	        <script>
 	            Swal.fire({
 	                icon: 'error',
 	                title: 'Gagal!',
-	                text: 'Gejala " . $kd_gejala . " gagal dihapus!'
+	                text: 'Relasi gagal dihapus!'
 	            }).then((result) => {
 	                if (result.isConfirmed) {
-	                    window.location.href = 'gejala.php';
+	                    window.location.href = 'relasi.php';
 	                }
 	            });
 	        </script>

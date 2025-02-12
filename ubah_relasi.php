@@ -11,58 +11,57 @@
         exit;
     }
 
-    $kd_kerusakan = $_GET['kd_kerusakan'];
-    $data_kerusakan_solusi = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM kerusakan_solusi WHERE kd_kerusakan = '$kd_kerusakan'"));
-    if ($data_kerusakan_solusi == null) {
-        header("Location: kerusakan_solusi.php");
+    $id_relasi = $_GET['id_relasi'];
+    $data_relasi = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM relasi INNER JOIN kerusakan_solusi ON relasi.kd_kerusakan = kerusakan_solusi.kd_kerusakan INNER JOIN gejala ON relasi.kd_gejala = gejala.kd_gejala WHERE id_relasi = '$id_relasi'"));
+    if ($data_relasi == null) {
+        header("Location: relasi.php");
         exit;
     }
+    
+    $kd_kerusakan = $data_relasi['kd_kerusakan'];
+    $kd_gejala = $data_relasi['kd_gejala'];
+    
 ?>
 
 <!DOCTYPE html>
 <html lang="en"> <!--begin::Head-->
 
 <head>
-    <title>Ubah Kerusakan & Solusi - <?= $data_kerusakan_solusi['kd_kerusakan']; ?></title>
+    <title>Ubah Relasi</title>
     <?php include_once 'include/head.php'; ?>
 </head> <!--end::Head--> <!--begin::Body-->
 <body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
     <?php 
-        $kd_kerusakan = $data_kerusakan_solusi['kd_kerusakan'];
-        
-        if (isset($_POST['btnUbahKerusakanSolusi'])) {
-            $nama_kerusakan = htmlspecialchars($_POST['nama_kerusakan']);
-            $definisi = htmlspecialchars($_POST['definisi']);
-            $solusi = htmlspecialchars($_POST['solusi']);
+        if (isset($_POST['btnUbahRelasi'])) {
+            $bobot = htmlspecialchars($_POST['bobot']);
 
-            $update_kerusakan_solusi = mysqli_query($conn, "UPDATE kerusakan_solusi SET nama_kerusakan = '$nama_kerusakan', definisi = '$definisi', solusi = '$solusi' WHERE kd_kerusakan = '$kd_kerusakan'");
+            $update_relasi = mysqli_query($conn, "UPDATE relasi SET bobot = '$bobot' WHERE id_relasi = '$id_relasi'");
 
-            if ($update_kerusakan_solusi) {
-                $log_berhasil = mysqli_query($conn, "INSERT INTO log VALUES ('', 'Kerusakan & Solusi $kd_kerusakan berhasil diubah!', CURRENT_TIMESTAMP(), " . $dataUser['id_user'] . ")");
+            if ($update_relasi) {
+                $log_berhasil = mysqli_query($conn, "INSERT INTO log VALUES ('', 'Relasi $kd_kerusakan | $kd_gejala berhasil diubah!', CURRENT_TIMESTAMP(), " . $dataUser['id_user'] . ")");
 
                 echo "
                     <script>
                         Swal.fire({
                             icon: 'success',
                             title: 'Berhasil!',
-                            text: 'Kerusakan & Solusi " . $kd_kerusakan . " berhasil diubah!'
+                            text: 'Relasi " . $kd_kerusakan .'|'. $kd_gejala . " berhasil diubah!'
                         }).then((result) => {
                             if (result.isConfirmed) {
-                                window.location.href = 'kerusakan_solusi.php';
+                                window.location.href = 'relasi.php';
                             }
                         });
                     </script>
                 ";
                 exit;
             } else {
-                $log_gagal = mysqli_query($conn, "INSERT INTO log VALUES ('', 'Kerusakan & Solusi $kd_kerusakan gagal diubah!', CURRENT_TIMESTAMP(), " . $dataUser['id_user'] . ")");
-
+                $log_gagal = mysqli_query($conn, "INSERT INTO log VALUES ('', 'Relasi $kd_gejala gagal diubah!', CURRENT_TIMESTAMP(), " . $dataUser['id_user'] . ")");
                 echo "
                     <script>
                         Swal.fire({
                             icon: 'error',
                             title: 'Gagal!',
-                            text: 'Kerusakan & Solusi " . $kd_kerusakan . " gagal diubah!'
+                            text: 'Relasi " . $kd_kerusakan .'|'. $kd_gejala . " gagal diubah!'
                         }).then((result) => {
                             if (result.isConfirmed) {
                                 window.history.back();
@@ -83,13 +82,13 @@
                 <div class="container-fluid"> <!--begin::Row-->
                     <div class="row">
                         <div class="col-sm-6">
-                            <h3 class="mb-0">Ubah Kerusakan & Solusi - <?= $data_kerusakan_solusi['kd_kerusakan']; ?></h3>
+                            <h3 class="mb-0">Ubah Relasi</h3>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-end">
-                                <li class="breadcrumb-item"><a href="kerusakan_solusi.php">Kerusakan & Solusi</a></li>
+                                <li class="breadcrumb-item"><a href="relasi.php">Relasi</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">
-                                    Ubah Kerusakan & Solusi
+                                    Ubah Relasi
                                 </li>
                             </ol>
                         </div>
@@ -104,24 +103,24 @@
                                 <form method="post" enctype="multipart/form-data"> 
                                     <div class="card-body">
                                         <div class="mb-3"> 
-                                            <label for="kd_kerusakan" class="form-label">Kode Kerusakan</label>
-                                            <input type="text" disabled style="cursor: not-allowed;"  class="form-control" id="kd_kerusakan" name="kd_kerusakan" value="<?= $data_kerusakan_solusi['kd_kerusakan']; ?>">
+                                            <label for="kd_kerusakan" class="form-label">Kerusakan</label>
+                                            <select style="cursor: not-allowed;" disabled class="form-select" id="kd_kerusakan" name="kd_kerusakan">
+                                                <option value="<?= $data_relasi['kd_kerusakan']; ?>"><?= $data_relasi['kd_kerusakan']; ?> | <?= $data_relasi['nama_kerusakan']; ?></option>
+                                            </select>
                                         </div>
                                         <div class="mb-3"> 
-                                            <label for="nama_kerusakan" class="form-label">Nama Kerusakan</label> 
-                                            <textarea class="form-control" id="nama_kerusakan" name="nama_kerusakan" required><?= $data_kerusakan_solusi['nama_kerusakan']; ?></textarea>
+                                            <label for="kd_gejala" class="form-label">Gejala</label>
+                                            <select style="cursor: not-allowed;" disabled class="form-select" id="kd_gejala" name="kd_gejala">
+                                                <option value="<?= $data_relasi['kd_gejala']; ?>"><?= $data_relasi['kd_gejala']; ?> | <?= $data_relasi['gejala']; ?></option>
+                                            </select>
                                         </div>
                                         <div class="mb-3"> 
-                                            <label for="definisi" class="form-label">Definisi</label> 
-                                            <textarea class="form-control" id="definisi" name="definisi" required><?= $data_kerusakan_solusi['definisi']; ?></textarea>
-                                        </div>
-                                        <div class="mb-3"> 
-                                            <label for="solusi" class="form-label">Solusi</label> 
-                                            <textarea class="form-control" id="solusi" name="solusi" required><?= $data_kerusakan_solusi['solusi']; ?></textarea>
+                                            <label for="bobot" class="form-label">Bobot</label>
+                                            <input type="number" step="0.01" class="form-control" id="bobot" name="bobot" value="<?= $data_relasi['bobot']; ?>" required>
                                         </div>
                                     </div> 
                                     <div class="card-footer pt-3">
-                                        <button type="submit" name="btnUbahKerusakanSolusi" class="btn btn-primary">Submit</button>
+                                        <button type="submit" name="btnUbahRelasi" class="btn btn-primary">Submit</button>
                                     </div> 
                                 </form> <!--end::Form-->
                             </div>
