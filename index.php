@@ -49,7 +49,7 @@
                                     <h5>Sistem Pakar Deteksi Kerusakan Mesin Sepeda Motor</h5>
                                     <p>Sistem Pakar Deteksi Kerusakan Mesin Sepeda Motor merupakan sistem berbasis website yang dirancang untuk membantu bengkel dalam mendiagnosis kerusakan mesin kendaraan secara cepat dan akurat.</p>
                                     <p>Sebagai pemilik bengkel, penting untuk memiliki kewaspadaan yang tinggi terhadap berbagai jenis kerusakan yang dapat terjadi pada mesin sepeda motor. Untuk itu, adanya Sistem Pakar Deteksi Kerusakan Mesin Sepeda Motor yang menggunakan metode Case-Based Reasoning (CBR) dapat dijadikan salah satu solusi. Sistem ini mampu menganalisis dan mendeteksi kerusakan dengan perhitungan yang tepat, sehingga dapat membantu mekanik dalam memberikan layanan perbaikan yang lebih efisien dan profesional.</p>
-                                    <a href="" class="btn btn-primary"><i class="fas fa-fw fa-cogs"></i> Diagnosa Mesin</a>
+                                    <a href="diagnosa_mesin.php" class="btn btn-primary"><i class="fas fa-fw fa-cogs"></i> Diagnosa Mesin</a>
                                 </div>
                             </div>
                         </div>

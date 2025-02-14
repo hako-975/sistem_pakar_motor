@@ -79,10 +79,12 @@
                                                                         <td class="align-middle text-center" width="50"><?= $dr2['kd_gejala']; ?></td>
                                                                         <td class="align-middle" width="300"><?= $dr2['gejala']; ?></td>
                                                                         <td class="align-middle text-center" width="50"><?= $dr2['bobot'] ?></td>
-                                                                        <td class="align-middle text-center" width="150">
-                                                                            <a href="ubah_relasi.php?id_relasi=<?= $dr2['id_relasi'] ?>" class="m-1 btn btn-success btn-sm"><i class="fas fa-fw fa-edit"></i> Ubah</a> 
-                                                                            <a href="hapus_relasi.php?id_relasi=<?= $dr2['id_relasi'] ?>"data-nama="<?= $dr2['gejala']; ?>" class="m-1 btn btn-danger btn-delete btn-sm"><i class="fas fa-fw fa-trash"></i> Hapus</a>
-                                                                        </td>
+                                                                        <?php if ($dataUser['jabatan'] == 'admin'): ?>
+                                                                            <td class="align-middle text-center" width="150">
+                                                                                <a href="ubah_relasi.php?id_relasi=<?= $dr2['id_relasi'] ?>" class="m-1 btn btn-success btn-sm"><i class="fas fa-fw fa-edit"></i> Ubah</a> 
+                                                                                <a href="hapus_relasi.php?id_relasi=<?= $dr2['id_relasi'] ?>"data-nama="<?= $dr2['gejala']; ?>" class="m-1 btn btn-danger btn-delete btn-sm"><i class="fas fa-fw fa-trash"></i> Hapus</a>
+                                                                            </td>
+                                                                        <?php endif ?>
                                                                     </tr>
                                                                 <?php endforeach; ?>
                                                             </table>

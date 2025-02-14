@@ -28,6 +28,7 @@
             $password = htmlspecialchars($_POST['password']);
             $ulangi_password = htmlspecialchars($_POST['ulangi_password']);
             $jenis_kelamin = htmlspecialchars($_POST['jenis_kelamin']);
+            $tanggal_lahir = htmlspecialchars($_POST['tanggal_lahir']);
             $alamat = htmlspecialchars($_POST['alamat']);
             
             if ($jenis_kelamin == '0') {
@@ -89,7 +90,7 @@
 
             $password_baru = password_hash($password, PASSWORD_DEFAULT);
             
-            $insert_user = mysqli_query($conn, "INSERT INTO user VALUES ('', '$username', '$password_baru', 'pelanggan', '$nama', '$jenis_kelamin', '$alamat', 'avatar.png', CURRENT_TIMESTAMP())");
+            $insert_user = mysqli_query($conn, "INSERT INTO user VALUES ('', '$username', '$password_baru', 'pelanggan', '$nama', '$jenis_kelamin', '$tanggal_lahir', '$alamat', 'avatar.png', CURRENT_TIMESTAMP())");
             
             $id_user = mysqli_insert_id($conn);
 
@@ -175,6 +176,13 @@
                         <div class="input-group-text">
                             <span class="fas fa-fw fa-venus-mars"></span>
                         </div>
+                    </div>
+                    <div class="input-group mb-1">
+                        <div class="form-floating"> 
+                            <input id="tanggal_lahir" name="tanggal_lahir" type="date" class="form-control" value="" placeholder="" required> 
+                            <label for="tanggal_lahir">Tanggal Lahir</label> 
+                        </div>
+                        <div class="input-group-text"> <span class="fas fa-fw fa-calendar"></span> </div>
                     </div>
                     <div class="input-group mb-1">
                         <div class="form-floating"> 

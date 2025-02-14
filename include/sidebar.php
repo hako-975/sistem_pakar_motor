@@ -21,6 +21,11 @@
                     </a>
                 </li>
                 <li class="nav-item"> 
+                    <a href="diagnosa_mesin.php" class="nav-link text-dark <?= ($_SERVER['REQUEST_URI'] == '/sistem_pakar_motor/diagnosa_mesin.php') ? 'active' : ''; ?>"> <i class="nav-icon fas fa-fw fa-cogs"></i>
+                        <p>Diagnosa Mesin</p>
+                    </a> 
+                </li>
+                <li class="nav-item"> 
                     <a href="kerusakan_solusi.php" class="nav-link text-dark <?= ($_SERVER['REQUEST_URI'] == '/sistem_pakar_motor/kerusakan_solusi.php') ? 'active' : ''; ?>"> <i class="nav-icon fas fa-fw fa-x-ray"></i>
                         <p>Kerusakan & Solusi</p>
                     </a> 
@@ -45,11 +50,13 @@
                         <p>Laporan User</p>
                     </a>
                 </li>
-                <li class="nav-item"> 
-                    <a href="user.php" class="nav-link text-dark <?= ($_SERVER['REQUEST_URI'] == '/sistem_pakar_motor/user.php') ? 'active' : ''; ?>"> <i class="nav-icon fas fa-fw fa-user"></i>
-                        <p>User</p>
-                    </a> 
-                </li>
+                <?php if ($dataUser['jabatan'] == 'admin'): ?>
+                    <li class="nav-item"> 
+                        <a href="user.php" class="nav-link text-dark <?= ($_SERVER['REQUEST_URI'] == '/sistem_pakar_motor/user.php') ? 'active' : ''; ?>"> <i class="nav-icon fas fa-fw fa-user"></i>
+                            <p>User</p>
+                        </a> 
+                    </li>
+                <?php endif ?>
                 <hr class="sidebar-divider">
                 <li class="nav-item"> 
                     <a href="log.php" class="nav-link text-dark <?= ($_SERVER['REQUEST_URI'] == '/sistem_pakar_motor/log.php') ? 'active' : ''; ?>"> <i class="nav-icon fas fa-fw fa-history"></i>

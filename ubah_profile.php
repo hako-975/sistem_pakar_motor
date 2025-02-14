@@ -19,6 +19,7 @@
         if (isset($_POST['btnUbahProfile'])) {
             $nama = htmlspecialchars($_POST['nama']);
             $jenis_kelamin = htmlspecialchars($_POST['jenis_kelamin']);
+            $tanggal_lahir = htmlspecialchars($_POST['tanggal_lahir']);
             $alamat = htmlspecialchars($_POST['alamat']);
             $foto = $dataUser['foto'];
         
@@ -79,7 +80,7 @@
             }
 
             $id_user = $dataUser['id_user'];
-            $update_profile = mysqli_query($conn, "UPDATE user SET nama = '$nama', jenis_kelamin = '$jenis_kelamin', alamat = '$alamat', foto = '$foto' WHERE id_user = '$id_user'");
+            $update_profile = mysqli_query($conn, "UPDATE user SET nama = '$nama', jenis_kelamin = '$jenis_kelamin', tanggal_lahir = '$tanggal_lahir', alamat = '$alamat', foto = '$foto' WHERE id_user = '$id_user'");
 
             if ($update_profile) {
                 $log_berhasil = mysqli_query($conn, "INSERT INTO log VALUES ('', 'Profile berhasil diperbaharui!', CURRENT_TIMESTAMP(), " . $dataUser['id_user'] . ")");
@@ -177,6 +178,13 @@
                                                     <option value="laki-laki">Laki-laki</option>
                                                 <?php endif ?>
                                             </select>
+                                        </div>
+                                        <div class="input-group mb-1">
+                                            <div class="form-floating"> 
+                                                <input id="tanggal_lahir" name="tanggal_lahir" type="date" class="form-control" value="<?= $dataUser['tanggal_lahir']; ?>" placeholder="" required> 
+                                                <label for="tanggal_lahir">Tanggal Lahir</label> 
+                                            </div>
+                                            <div class="input-group-text"> <span class="fas fa-fw fa-calendar"></span> </div>
                                         </div>
                                         <div class="mb-3"> 
                                             <label for="alamat" class="form-label">Alamat</label> 

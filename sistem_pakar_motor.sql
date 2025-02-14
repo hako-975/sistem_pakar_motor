@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 12 Feb 2025 pada 16.30
+-- Waktu pembuatan: 14 Feb 2025 pada 15.10
 -- Versi server: 10.4.27-MariaDB
 -- Versi PHP: 7.4.33
 
@@ -33,6 +33,14 @@ CREATE TABLE `analisa_hasil` (
   `kd_kerusakan` char(4) NOT NULL,
   `tanggal` datetime NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dumping data untuk tabel `analisa_hasil`
+--
+
+INSERT INTO `analisa_hasil` (`id`, `id_user`, `kd_kerusakan`, `tanggal`) VALUES
+(1, 2, 'KR05', '2025-02-14 21:10:26'),
+(2, 2, 'KR02', '2025-02-14 21:10:26');
 
 -- --------------------------------------------------------
 
@@ -118,47 +126,9 @@ CREATE TABLE `log` (
 --
 
 INSERT INTO `log` (`id_log`, `isi_log`, `tgl_log`, `id_user`) VALUES
-(1, 'User andri123 berhasil ditambahkan!', '2025-02-09 07:37:32', 2),
-(2, 'User andri123 berhasil login!', '2025-02-09 07:37:40', 2),
-(3, 'User admin berhasil login!', '2025-02-09 07:43:44', 1),
-(4, 'User admin berhasil login!', '2025-02-09 13:24:22', 1),
-(5, 'User admin berhasil logout!', '2025-02-09 13:37:35', 1),
-(6, 'User andri123 gagal ditambahkan!', '2025-02-09 13:43:17', 1),
-(7, 'User andri123 gagal ditambahkan!', '2025-02-09 13:43:59', 1),
-(8, 'User andri123 gagal ditambahkan!', '2025-02-09 13:44:13', 1),
-(9, 'User andri123 berhasil ditambahkan!', '2025-02-09 13:45:04', 3),
-(10, 'User andri123 berhasil login!', '2025-02-09 13:45:13', 3),
-(11, 'Profile berhasil diperbaharui!', '2025-02-09 13:50:31', 3),
-(12, 'Profile berhasil diperbaharui!', '2025-02-09 13:51:24', 3),
-(13, 'Profile berhasil diperbaharui!', '2025-02-09 13:51:39', 3),
-(14, 'Password berhasil diperbaharui!', '2025-02-09 13:51:55', 3),
-(15, 'User andri123 berhasil logout!', '2025-02-09 13:51:59', 3),
-(16, 'User andri123 berhasil login!', '2025-02-09 13:52:14', 3),
-(17, 'Password berhasil diperbaharui!', '2025-02-09 13:52:21', 3),
-(18, 'User andri123 berhasil logout!', '2025-02-09 15:03:06', 3),
-(19, 'User admin berhasil login!', '2025-02-09 15:03:19', 1),
-(20, 'User andri123 berhasil login!', '2025-02-09 15:04:08', 3),
-(21, 'User admin berhasil login!', '2025-02-10 07:51:51', 1),
-(22, 'Kerusakan Solusi KD69 berhasil ditambahkan!', '2025-02-10 08:08:33', 1),
-(23, 'Kerusakan & Solusi KD69 berhasil dihapus!', '2025-02-10 08:13:19', 1),
-(24, 'User admin berhasil logout!', '2025-02-10 08:16:10', 1),
-(25, 'Kerusakan Solusi asd berhasil ditambahkan!', '2025-02-10 08:22:39', 1),
-(26, 'Kerusakan & Solusi asd berhasil diubah!', '2025-02-10 08:22:46', 1),
-(27, 'Kerusakan & Solusi asd berhasil dihapus!', '2025-02-10 08:22:49', 1),
-(28, 'Gejala asd berhasil ditambahkan!', '2025-02-10 08:29:50', 1),
-(29, 'Gejala asd berhasil dihapus!', '2025-02-10 08:31:03', 1),
-(30, 'Gejala asd berhasil ditambahkan!', '2025-02-10 08:31:12', 1),
-(31, 'Gejala asd berhasil diubah!', '2025-02-10 08:33:24', 1),
-(32, 'Gejala asd berhasil diubah!', '2025-02-10 08:33:31', 1),
-(33, 'Gejala asd berhasil dihapus!', '2025-02-10 08:33:37', 1),
-(34, 'User admin berhasil logout!', '2025-02-10 12:27:13', 1),
-(35, 'User admin berhasil login!', '2025-02-11 11:52:47', 1),
-(36, 'User admin berhasil login!', '2025-02-12 13:05:17', 1),
-(37, 'Relasi KR01 | G03 berhasil ditambahkan!', '2025-02-12 13:26:26', 1),
-(38, 'Relasi berhasil dihapus!', '2025-02-12 15:20:32', 1),
-(39, 'Relasi  |  berhasil diubah!', '2025-02-12 15:29:29', 1),
-(40, 'Relasi KR01 | G01 berhasil diubah!', '2025-02-12 15:30:10', 1),
-(41, 'Relasi KR01 | G01 berhasil diubah!', '2025-02-12 15:30:16', 1);
+(1, 'User admin berhasil logout!', '2025-02-14 14:07:30', 1),
+(2, 'User andri123 berhasil login!', '2025-02-14 14:07:44', 2),
+(3, 'User andri123 berhasil logout!', '2025-02-14 14:10:40', 2);
 
 -- --------------------------------------------------------
 
@@ -265,6 +235,15 @@ CREATE TABLE `tmp_gejala` (
   `bobot` float NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
+--
+-- Dumping data untuk tabel `tmp_gejala`
+--
+
+INSERT INTO `tmp_gejala` (`noip`, `kd_gejala`, `bobot`) VALUES
+(1, 'G02', 0),
+(2, 'G05', 0),
+(3, 'G20', 0);
+
 -- --------------------------------------------------------
 
 --
@@ -276,6 +255,29 @@ CREATE TABLE `tmp_kerusakan` (
   `kd_kerusakan` char(4) NOT NULL,
   `nilai` double NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dumping data untuk tabel `tmp_kerusakan`
+--
+
+INSERT INTO `tmp_kerusakan` (`noip`, `kd_kerusakan`, `nilai`) VALUES
+('', 'KR01', 0),
+('', 'KR02', 0.35416666138917),
+('', 'KR03', 0),
+('', 'KR04', 0),
+('', 'KR05', 0.99999997832558),
+('', 'KR06', 0),
+('', 'KR07', 0),
+('', 'KR08', 0),
+('', 'KR09', 0),
+('', 'KR10', 0),
+('', 'P01', 0.13793103278179),
+('', 'P02', 0.45762712511651),
+('', 'P03', 0),
+('', 'P04', 0.38709676935571),
+('', 'P05', 0),
+('', 'P06', 0),
+('', 'P07', 0);
 
 -- --------------------------------------------------------
 
@@ -290,6 +292,7 @@ CREATE TABLE `user` (
   `jabatan` enum('admin','pelanggan') NOT NULL,
   `nama` varchar(100) NOT NULL,
   `jenis_kelamin` enum('laki-laki','perempuan') NOT NULL,
+  `tanggal_lahir` date NOT NULL,
   `alamat` text NOT NULL,
   `foto` text NOT NULL,
   `dibuat_pada` timestamp NOT NULL DEFAULT current_timestamp()
@@ -299,9 +302,9 @@ CREATE TABLE `user` (
 -- Dumping data untuk tabel `user`
 --
 
-INSERT INTO `user` (`id_user`, `username`, `password`, `jabatan`, `nama`, `jenis_kelamin`, `alamat`, `foto`, `dibuat_pada`) VALUES
-(1, 'admin', '$2y$10$PDN4Md5jfPRsvJ5DJyJ.r.Bcf6mMSG.g5BBZaivJEd6padJYBerky', 'admin', 'Administrator', 'laki-laki', 'pocis', 'avatar.png', '2025-01-07 09:15:31'),
-(3, 'andri123', '$2y$10$yxpRwXgVhCn4glx/2axC0O0zLuOvaCNs9bEu7onnbU88LsSI7HLeG', 'pelanggan', 'Andri Firman Saputra', 'laki-laki', 'pocis', 'avatar.png', '2025-02-09 13:45:04');
+INSERT INTO `user` (`id_user`, `username`, `password`, `jabatan`, `nama`, `jenis_kelamin`, `tanggal_lahir`, `alamat`, `foto`, `dibuat_pada`) VALUES
+(1, 'admin', '$2y$10$PDN4Md5jfPRsvJ5DJyJ.r.Bcf6mMSG.g5BBZaivJEd6padJYBerky', 'admin', 'admin', 'laki-laki', '2002-01-29', 'admin', 'default.jpg', '2025-02-14 07:43:47'),
+(2, 'andri123', '$2y$10$jbGxUJnFFliRobf4.ekOLOzY5L3Hq0LIf45taqnadRsg/EZYvr56y', 'pelanggan', 'Andri Firman Saputra', 'laki-laki', '2002-01-29', 'Pocis', 'avatar.png', '2025-02-14 07:47:14');
 
 --
 -- Indexes for dumped tables
@@ -376,13 +379,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT untuk tabel `analisa_hasil`
 --
 ALTER TABLE `analisa_hasil`
-  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT untuk tabel `log`
 --
 ALTER TABLE `log`
-  MODIFY `id_log` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `id_log` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT untuk tabel `relasi`
@@ -394,13 +397,13 @@ ALTER TABLE `relasi`
 -- AUTO_INCREMENT untuk tabel `tmp_gejala`
 --
 ALTER TABLE `tmp_gejala`
-  MODIFY `noip` int(3) NOT NULL AUTO_INCREMENT;
+  MODIFY `noip` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT untuk tabel `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
