@@ -41,6 +41,11 @@
                     </a> 
                 </li>
                 <li class="nav-item"> 
+                    <a href="mekanik.php" class="nav-link text-dark <?= ($_SERVER['REQUEST_URI'] == '/sistem_pakar_motor/mekanik.php') ? 'active' : ''; ?>"> <i class="nav-icon fas fa-fw fa-users-cog"></i>
+                        <p>Mekanik</p>
+                    </a> 
+                </li>
+                <li class="nav-item"> 
                     <a href="laporan_gejala.php" class="nav-link text-dark <?= ($_SERVER['REQUEST_URI'] == '/sistem_pakar_motor/laporan_gejala.php') ? 'active' : ''; ?>"> <i class="nav-icon fas fa-fw fa-file-alt"></i>
                         <p>Laporan Gejala</p>
                     </a>

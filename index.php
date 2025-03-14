@@ -5,6 +5,22 @@
         header("Location: login.php");
         exit;
     }
+
+
+    $chart_diagnosa = mysqli_query($conn, "SELECT tanggal, COUNT(id) as jumlah FROM analisa_hasil GROUP BY tanggal ORDER BY tanggal ASC");
+
+    $data_diagnosa = [];
+    while ($row = mysqli_fetch_assoc($chart_diagnosa)) {
+        $row['tanggal'] = date('d-m-Y', strtotime($row['tanggal']));
+        $data_diagnosa[] = $row;
+    }
+
+    // Convert data to JSON
+    $labels = array_column($data_diagnosa, 'tanggal');
+    $diagnosaData = array_column($data_diagnosa, 'jumlah');
+
+    $labels_json = json_encode($labels);
+    $diagnosaData_json = json_encode($diagnosaData);
 ?>
 
 <!DOCTYPE html>
@@ -39,6 +55,18 @@
             </div>
             <div class="app-content"> <!--begin::Container-->
                 <div class="container-fluid"> <!-- Info boxes -->
+                    <div class="row mb-3">
+                        <div class="col">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="m-0">Jumlah Diagnosa</h4>
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="diagnosaChart" width="100%"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col">
                             <div class="card">
@@ -60,6 +88,51 @@
         <?php include_once 'include/footer.php'; ?>
     </div> <!--end::App Wrapper--> 
     <?php include_once 'include/script.php'; ?>
+
+    <script>
+    $(document).ready(function() {
+        // Data for charts, replace this with your actual data
+        var labels = <?= $labels_json; ?>;
+        var diagnosaData = <?= $diagnosaData_json; ?>;
+
+        var ctx = document.getElementById('diagnosaChart').getContext('2d');
+
+        var chartType = 'bar';
+
+        var chartData = {
+            labels: labels,
+            datasets: [
+                {
+                    label: 'Jumlah Diagnosa',
+                    data: diagnosaData,
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 1
+                }
+            ]
+        };
+
+        var diagnosaChart = new Chart(ctx, {
+            type: chartType,
+            data: chartData,
+            options: {
+                plugins: {
+                    legend: {
+                        display: false // Matikan legend
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            stepSize: 1 // Force integer steps
+                        }
+                    }
+                }
+            }
+        });
+    });
+    </script>
 </body><!--end::Body-->
 
 </html>

@@ -20,6 +20,7 @@
 <body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
     <?php 
         if (isset($_POST['btnTambahDiagnosaMesin'])) {
+            $id_mekanik = $_POST['id_mekanik'];
             if (!isset($_POST['gejala'])) {
                 echo "
                     <script>
@@ -204,7 +205,7 @@
                                         echo "Persentase kerusakan mesin motor " . $row_penyasol['nama_kerusakan'] . " Sebesar ". $persen . "%". "<br>";
                                         // simpan data
                                         $id_user = $dataUser['id_user'];
-                                        $query_hasil2 = "INSERT INTO analisa_hasil(id_user, kd_kerusakan, tanggal) VALUES ('$id_user','$kd_pen2', CURRENT_TIMESTAMP())";
+                                        $query_hasil2 = "INSERT INTO analisa_hasil(id_user, id_mekanik, kd_kerusakan, tanggal) VALUES ('$id_user', '$id_mekanik','$kd_pen2', CURRENT_TIMESTAMP())";
                                         $res_hasil2 = mysqli_query($conn, $query_hasil2);
                                         if ($res_hasil2) {
                                             echo "";

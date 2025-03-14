@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 14 Feb 2025 pada 15.10
+-- Waktu pembuatan: 14 Mar 2025 pada 09.04
 -- Versi server: 10.4.27-MariaDB
 -- Versi PHP: 7.4.33
 
@@ -30,6 +30,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `analisa_hasil` (
   `id` int(4) NOT NULL,
   `id_user` int(11) NOT NULL,
+  `id_mekanik` int(11) NOT NULL,
   `kd_kerusakan` char(4) NOT NULL,
   `tanggal` datetime NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
@@ -38,9 +39,12 @@ CREATE TABLE `analisa_hasil` (
 -- Dumping data untuk tabel `analisa_hasil`
 --
 
-INSERT INTO `analisa_hasil` (`id`, `id_user`, `kd_kerusakan`, `tanggal`) VALUES
-(1, 2, 'KR05', '2025-02-14 21:10:26'),
-(2, 2, 'KR02', '2025-02-14 21:10:26');
+INSERT INTO `analisa_hasil` (`id`, `id_user`, `id_mekanik`, `kd_kerusakan`, `tanggal`) VALUES
+(1, 1, 3, 'KR01', '2025-03-13 14:46:38'),
+(2, 1, 3, 'KR07', '2025-03-13 14:46:38'),
+(3, 1, 3, 'KR02', '2025-03-13 14:46:38'),
+(4, 1, 3, 'KR07', '2025-03-14 15:01:32'),
+(5, 1, 3, 'KR04', '2025-03-14 15:01:32');
 
 -- --------------------------------------------------------
 
@@ -128,7 +132,43 @@ CREATE TABLE `log` (
 INSERT INTO `log` (`id_log`, `isi_log`, `tgl_log`, `id_user`) VALUES
 (1, 'User admin berhasil logout!', '2025-02-14 14:07:30', 1),
 (2, 'User andri123 berhasil login!', '2025-02-14 14:07:44', 2),
-(3, 'User andri123 berhasil logout!', '2025-02-14 14:10:40', 2);
+(3, 'User andri123 berhasil logout!', '2025-02-14 14:10:40', 2),
+(4, 'User admin berhasil login!', '2025-03-14 05:56:06', 1),
+(5, 'Mekanik Irgi berhasil ditambahkan!', '2025-03-14 07:20:18', 1),
+(6, 'Mekanik andri berhasil ditambahkan!', '2025-03-14 07:21:40', 1),
+(7, 'Mekanik Irgi berhasil dihapus!', '2025-03-14 07:23:32', 1),
+(8, 'Mekanik Irgi berhasil ditambahkan!', '2025-03-14 07:23:38', 1),
+(9, 'Mekanik asd berhasil ditambahkan!', '2025-03-14 07:26:47', 1),
+(10, 'Mekanik dsa berhasil diubah!', '2025-03-14 07:26:51', 1),
+(11, 'Mekanik dsa berhasil dihapus!', '2025-03-14 07:26:54', 1),
+(12, 'Analisa Hasil Andri Firman Saputra berhasil dihapus!', '2025-03-14 07:29:02', 1),
+(13, 'Analisa Hasil Andri Firman Saputra berhasil dihapus!', '2025-03-14 07:29:03', 1),
+(14, 'Analisa Hasil admin berhasil dihapus!', '2025-03-14 07:29:04', 1),
+(15, 'Analisa Hasil admin berhasil dihapus!', '2025-03-14 07:29:04', 1),
+(16, 'Analisa Hasil admin berhasil dihapus!', '2025-03-14 07:29:05', 1),
+(17, 'Analisa Hasil admin berhasil dihapus!', '2025-03-14 07:29:06', 1),
+(18, 'Analisa Hasil admin berhasil dihapus!', '2025-03-14 07:29:07', 1),
+(19, 'Analisa Hasil admin berhasil dihapus!', '2025-03-14 07:29:07', 1),
+(20, 'User admin berhasil logout!', '2025-03-14 08:04:34', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `mekanik`
+--
+
+CREATE TABLE `mekanik` (
+  `id_mekanik` int(11) NOT NULL,
+  `nama_mekanik` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `mekanik`
+--
+
+INSERT INTO `mekanik` (`id_mekanik`, `nama_mekanik`) VALUES
+(2, 'andri'),
+(3, 'Irgi');
 
 -- --------------------------------------------------------
 
@@ -240,9 +280,8 @@ CREATE TABLE `tmp_gejala` (
 --
 
 INSERT INTO `tmp_gejala` (`noip`, `kd_gejala`, `bobot`) VALUES
-(1, 'G02', 0),
-(2, 'G05', 0),
-(3, 'G20', 0);
+(14, 'G04', 0),
+(15, 'G07', 0);
 
 -- --------------------------------------------------------
 
@@ -262,21 +301,21 @@ CREATE TABLE `tmp_kerusakan` (
 
 INSERT INTO `tmp_kerusakan` (`noip`, `kd_kerusakan`, `nilai`) VALUES
 ('', 'KR01', 0),
-('', 'KR02', 0.35416666138917),
+('', 'KR02', 0),
 ('', 'KR03', 0),
-('', 'KR04', 0),
-('', 'KR05', 0.99999997832558),
+('', 'KR04', 0.35294117482063),
+('', 'KR05', 0),
 ('', 'KR06', 0),
-('', 'KR07', 0),
+('', 'KR07', 0.48275862465857),
 ('', 'KR08', 0),
 ('', 'KR09', 0),
 ('', 'KR10', 0),
-('', 'P01', 0.13793103278179),
-('', 'P02', 0.45762712511651),
-('', 'P03', 0),
-('', 'P04', 0.38709676935571),
-('', 'P05', 0),
-('', 'P06', 0),
+('', 'P01', 0),
+('', 'P02', 0.16949152782093),
+('', 'P03', 0.10958904002213),
+('', 'P04', 0),
+('', 'P05', 0.23188405476606),
+('', 'P06', 0.32075471625968),
 ('', 'P07', 0);
 
 -- --------------------------------------------------------
@@ -315,7 +354,8 @@ INSERT INTO `user` (`id_user`, `username`, `password`, `jabatan`, `nama`, `jenis
 --
 ALTER TABLE `analisa_hasil`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `id_user` (`id_user`);
+  ADD KEY `id_user` (`id_user`),
+  ADD KEY `id_mekanik` (`id_mekanik`);
 
 --
 -- Indeks untuk tabel `gejala`
@@ -335,6 +375,12 @@ ALTER TABLE `kerusakan_solusi`
 ALTER TABLE `log`
   ADD PRIMARY KEY (`id_log`),
   ADD KEY `id_user` (`id_user`);
+
+--
+-- Indeks untuk tabel `mekanik`
+--
+ALTER TABLE `mekanik`
+  ADD PRIMARY KEY (`id_mekanik`);
 
 --
 -- Indeks untuk tabel `relasi`
@@ -379,13 +425,19 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT untuk tabel `analisa_hasil`
 --
 ALTER TABLE `analisa_hasil`
-  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT untuk tabel `log`
 --
 ALTER TABLE `log`
-  MODIFY `id_log` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_log` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
+--
+-- AUTO_INCREMENT untuk tabel `mekanik`
+--
+ALTER TABLE `mekanik`
+  MODIFY `id_mekanik` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT untuk tabel `relasi`
@@ -397,7 +449,7 @@ ALTER TABLE `relasi`
 -- AUTO_INCREMENT untuk tabel `tmp_gejala`
 --
 ALTER TABLE `tmp_gejala`
-  MODIFY `noip` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `noip` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT untuk tabel `user`

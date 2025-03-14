@@ -6,19 +6,14 @@
         exit;
     }
 
-    if ($dataUser['jabatan'] == 'admin') {
-        $hasil_user = mysqli_query($conn, "SELECT * FROM analisa_hasil INNER JOIN kerusakan_solusi ON analisa_hasil.kd_kerusakan = kerusakan_solusi.kd_kerusakan INNER JOIN user ON analisa_hasil.id_user = user.id_user LEFT JOIN mekanik ON analisa_hasil.id_mekanik = mekanik.id_mekanik ORDER BY analisa_hasil.id");
-    } else {
-        $id_user = $dataUser['id_user'];
-        $hasil_user = mysqli_query($conn, "SELECT * FROM analisa_hasil INNER JOIN kerusakan_solusi ON analisa_hasil.kd_kerusakan = kerusakan_solusi.kd_kerusakan INNER JOIN user ON analisa_hasil.id_user = user.id_user LEFT JOIN mekanik ON analisa_hasil.id_mekanik = mekanik.id_mekanik WHERE user.id_user = '$id_user'");
-    }
+    $mekanik = mysqli_query($conn, "SELECT * FROM mekanik ORDER BY nama_mekanik ASC");
 ?>
 
 <!DOCTYPE html>
 <html lang="en"> <!--begin::Head-->
 
 <head>
-    <title>Laporan User - Sistem Pakar Motor</title>
+    <title>Mekanik - Sistem Pakar Motor</title>
     <?php include_once 'include/head.php'; ?>
 </head> <!--end::Head--> <!--begin::Body-->
 <body class="layout-fixed sidebar-expand-lg bg-body-tertiary"> <!--begin::App Wrapper-->
@@ -31,13 +26,13 @@
                 <div class="container-fluid"> <!--begin::Row-->
                     <div class="row">
                         <div class="col-sm-6">
-                            <h3 class="mb-0"><i class="nav-icon fas fa-fw fa-file-alt"></i> Laporan User</h3>
+                            <h3 class="mb-0"><i class="nav-icon fas fa-fw fa-users-cog"></i> Mekanik</h3>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-end">
                                 <li class="breadcrumb-item"><a href="index.php">Dashboard</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">
-                                    Laporan User
+                                    Mekanik
                                 </li>
                             </ol>
                         </div>
@@ -50,41 +45,33 @@
                         <div class="col">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="m-0">Daftar Laporan User</h4>
+                                    <h4 class="m-0">Daftar Mekanik</h4>
                                 </div>
                                 <div class="card-body">
                                     <div class="table-responsive p-2">
+                                        <?php if ($dataUser['jabatan'] == 'admin'): ?>
+                                            <a href="tambah_mekanik.php" class="mb-3 btn btn-primary"><i class="fas fa-fw fa-plus"></i> Tambah Mekanik</a>
+                                        <?php endif ?>
                                         <table class="table table-bordered" id="table_id">
                                             <thead class="table-dark">
                                                 <tr>
-                                                    <th class="text-center align-middle">No.</th>
-                                                    <th class="text-center align-middle">Nama Mekanik</th>
-                                                    <th class="text-center align-middle">Nama</th>
-                                                    <th class="text-center align-middle">Jenis Kelamin</th>
-                                                    <th class="text-center align-middle">Tanggal Lahir</th>
-                                                    <th class="text-center align-middle">Alamat</th>
-                                                    <th class="text-center align-middle">Kerusakan</th>
-                                                    <th class="text-center align-middle">Tanggal Diagnosa</th>
+                                                    <th width="200" class="text-center align-middle">ID Mekanik</th>
+                                                    <th class="text-center align-middle">Mekanik</th>
                                                     <?php if ($dataUser['jabatan'] == 'admin'): ?>
-                                                        <th class="text-center align-middle">Aksi</th>
+                                                        <th width="300" class="text-center align-middle">Aksi</th>
                                                     <?php endif ?>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <?php $i = 1; ?>
-                                                <?php foreach ($hasil_user as $dhu): ?>
+                                                <?php foreach ($mekanik as $dm): ?>
                                                     <tr>
-                                                        <td class="text-center align-middle"><?= $i++; ?>.</td>
-                                                        <td class="align-middle"><?= $dhu['nama_mekanik']; ?></td>
-                                                        <td class="align-middle"><?= $dhu['nama']; ?></td>
-                                                        <td class="align-middle"><?= $dhu['jenis_kelamin']; ?></td>
-                                                        <td class="align-middle"><?= $dhu['tanggal_lahir']; ?></td>
-                                                        <td class="align-middle"><?= $dhu['alamat']; ?></td>
-                                                        <td class="align-middle"><?= $dhu['nama_kerusakan']; ?> (<?= $dhu['kd_kerusakan']; ?>)</td>
-                                                        <td class="align-middle"><?= $dhu['tanggal']; ?></td>
+                                                        <td class="text-center align-middle"><?= $dm['id_mekanik']; ?></td>
+                                                        <td class="align-middle"><?= $dm['nama_mekanik']; ?></td>
                                                         <?php if ($dataUser['jabatan'] == 'admin'): ?>
                                                             <td class="text-center align-middle">
-                                                                <a href="hapus_hasil_user.php?id=<?= $dhu['id']; ?>" data-nama="<?= $dhu['nama']; ?>" class="m-1 btn btn-danger btn-delete"><i class="fas fa-fw fa-trash"></i> Hapus</a>
+                                                                <a href="ubah_mekanik.php?id_mekanik=<?= $dm['id_mekanik']; ?>" class="m-1 btn btn-success"><i class="fas fa-fw fa-edit"></i> Ubah</a>
+                                                                <a href="hapus_mekanik.php?id_mekanik=<?= $dm['id_mekanik']; ?>" data-nama="<?= $dm['nama_mekanik']; ?>" class="m-1 btn btn-danger btn-delete"><i class="fas fa-fw fa-trash"></i> Hapus</a>
                                                             </td>
                                                         <?php endif ?>
                                                     </tr>

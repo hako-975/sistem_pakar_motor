@@ -7,6 +7,7 @@
     }
 
     $get_gejala = mysqli_query($conn, "SELECT * FROM gejala ORDER BY kd_gejala ASC");
+    $mekanik = mysqli_query($conn, "SELECT * FROM mekanik ORDER BY nama_mekanik ASC");
 
 ?>
 
@@ -47,6 +48,15 @@
                             <div class="card card-primary card-outline mb-4">
                                 <form method="post" action="hasil_diagnosa.php"> 
                                     <div class="card-body">
+                                        <div class="mb-3"> 
+                                            <label for="id_mekanik" class="form-label">Nama Mekanik</label> 
+                                            <select class="form-select" id="id_mekanik" name="id_mekanik" required>
+                                                <option value="0">--- Nama Mekanik ---</option>
+                                                <?php foreach ($mekanik as $dm): ?>
+                                                    <option value="<?= $dm['id_mekanik']; ?>"><?= $dm['nama_mekanik']; ?></option>
+                                                <?php endforeach ?>
+                                            </select>
+                                        </div>
                                         <h4 class="text-center">Pilih Gejala Yang Dialami</h4>
                                         <h5>Form Konsultasi:</h5>
                                         <?php $id_no = 1; ?>
