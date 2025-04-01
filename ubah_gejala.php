@@ -32,8 +32,9 @@
         
         if (isset($_POST['btnUbahGejala'])) {
             $gejala = htmlspecialchars($_POST['gejala']);
+            $deskripsi_gejala = htmlspecialchars($_POST['deskripsi_gejala']);
 
-            $update_gejala = mysqli_query($conn, "UPDATE gejala SET gejala = '$gejala' WHERE kd_gejala = '$kd_gejala'");
+            $update_gejala = mysqli_query($conn, "UPDATE gejala SET gejala = '$gejala', deskripsi_gejala = '$deskripsi_gejala' WHERE kd_gejala = '$kd_gejala'");
 
             if ($update_gejala) {
                 $log_berhasil = mysqli_query($conn, "INSERT INTO log VALUES ('', 'Gejala $kd_gejala berhasil diubah!', CURRENT_TIMESTAMP(), " . $dataUser['id_user'] . ")");
@@ -108,6 +109,10 @@
                                         <div class="mb-3"> 
                                             <label for="gejala" class="form-label">Gejala</label> 
                                             <textarea class="form-control" id="gejala" name="gejala" required><?= $data_gejala['gejala']; ?></textarea>
+                                        </div>
+                                        <div class="mb-3"> 
+                                            <label for="deskripsi_gejala" class="form-label">Deskrispi Gejala</label> 
+                                            <textarea class="form-control" id="deskripsi_gejala" name="deskripsi_gejala" required><?= $data_gejala['deskripsi_gejala']; ?></textarea>
                                         </div>
                                     </div> 
                                     <div class="card-footer pt-3">

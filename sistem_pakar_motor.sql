@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 14 Mar 2025 pada 09.04
+-- Waktu pembuatan: 01 Apr 2025 pada 11.45
 -- Versi server: 10.4.27-MariaDB
 -- Versi PHP: 7.4.33
 
@@ -28,10 +28,11 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `analisa_hasil` (
-  `id` int(4) NOT NULL,
+  `id_hasil` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
   `id_mekanik` int(11) NOT NULL,
-  `kd_kerusakan` char(4) NOT NULL,
+  `kd_kerusakan` char(4) DEFAULT NULL,
+  `nilai_akhir` float DEFAULT NULL,
   `tanggal` datetime NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
@@ -39,12 +40,12 @@ CREATE TABLE `analisa_hasil` (
 -- Dumping data untuk tabel `analisa_hasil`
 --
 
-INSERT INTO `analisa_hasil` (`id`, `id_user`, `id_mekanik`, `kd_kerusakan`, `tanggal`) VALUES
-(1, 1, 3, 'KR01', '2025-03-13 14:46:38'),
-(2, 1, 3, 'KR07', '2025-03-13 14:46:38'),
-(3, 1, 3, 'KR02', '2025-03-13 14:46:38'),
-(4, 1, 3, 'KR07', '2025-03-14 15:01:32'),
-(5, 1, 3, 'KR04', '2025-03-14 15:01:32');
+INSERT INTO `analisa_hasil` (`id_hasil`, `id_user`, `id_mekanik`, `kd_kerusakan`, `nilai_akhir`, `tanggal`) VALUES
+(1, 3, 3, 'K001', 58.3333, '2025-04-01 16:03:41'),
+(2, 1, 3, NULL, NULL, '2025-04-01 16:26:50'),
+(4, 1, 3, 'K001', 100, '2025-04-01 16:42:25'),
+(5, 1, 2, NULL, NULL, '2025-04-01 16:42:36'),
+(6, 3, 3, 'K005', 100, '2025-04-01 16:42:45');
 
 -- --------------------------------------------------------
 
@@ -54,34 +55,35 @@ INSERT INTO `analisa_hasil` (`id`, `id_user`, `id_mekanik`, `kd_kerusakan`, `tan
 
 CREATE TABLE `gejala` (
   `kd_gejala` char(4) NOT NULL,
-  `gejala` varchar(100) NOT NULL
+  `gejala` varchar(100) NOT NULL,
+  `deskripsi_gejala` text NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data untuk tabel `gejala`
 --
 
-INSERT INTO `gejala` (`kd_gejala`, `gejala`) VALUES
-('G15', 'Suara mesin kasar saat dinyalakan'),
-('G14', 'Oli berkurang tanpa sebab jelas'),
-('G13', 'Mesin sering overheat'),
-('G12', 'Knalpot mengeluarkan asap hitam'),
-('G11', 'Knalpot mengeluarkan asap putih'),
-('G10', 'Aki cepat habis'),
-('G09', 'Konsumsi bahan bakar tinggi'),
-('G08', 'Mesin bergetar hebat'),
-('G07', 'Terdengar bunyi aneh pada mesin'),
-('G06', 'Mesin tidak bertenaga'),
-('G05', 'Mesin mati mendadak'),
-('G01', 'Mesin tidak mau menyala'),
-('G02', 'Mesin cepat panas'),
-('G03', 'Mesin tersendat saat digas'),
-('G04', 'Knalpot mengeluarkan asap tebal'),
-('G16', 'Tarikan gas berat'),
-('G17', 'Lampu indikator panas menyala'),
-('G18', 'Mesin sulit dihidupkan di pagi hari'),
-('G19', 'Kelistrikan mati sebagian'),
-('G20', 'Mesin sering mati saat idle');
+INSERT INTO `gejala` (`kd_gejala`, `gejala`, `deskripsi_gejala`) VALUES
+('G001', 'Mesin tidak menyala saat distarter', 'Mesin tidak bereaksi saat distarter, tidak ada tanda-tanda hidup.'),
+('G002', 'Suara mesin tidak stabil', 'Mesin mengeluarkan suara yang tidak konsisten, kadang tinggi kadang rendah.'),
+('G003', 'Busi tidak menghasilkan percikan api', 'Busi tidak mengeluarkan percikan api saat distarter.'),
+('G004', 'Suhu mesin sangat panas', 'Mesin terasa panas berlebihan saat disentuh atau terlihat dari indikator suhu.'),
+('G005', 'Mesin mati secara tiba-tiba', 'Mesin tiba-tiba mati saat sedang digunakan.'),
+('G006', 'Asap keluar dari mesin', 'Asap putih atau hitam keluar dari bagian mesin atau knalpot.'),
+('G007', 'Suara ketukan dari mesin', 'Mesin mengeluarkan suara ketukan yang tidak normal.'),
+('G008', 'Getaran yang tidak normal', 'Mesin bergetar secara berlebihan saat dihidupkan atau digunakan.'),
+('G009', 'Performa mesin menurun', 'Mesin terasa lemah dan tidak bertenaga saat digunakan.'),
+('G010', 'Mesin tersendat-sendat', 'Mesin tidak berakselerasi dengan lancar, tersendat saat gas ditarik.'),
+('G011', 'Kecepatan tidak stabil', 'Kecepatan mesin naik turun tanpa diatur.'),
+('G012', 'Tenaga mesin berkurang', 'Mesin tidak menghasilkan tenaga maksimal saat digunakan.'),
+('G013', 'Konsumsi bahan bakar berlebihan', 'Bahan bakar habis lebih cepat dari biasanya.'),
+('G014', 'Bau bahan bakar menyengat', 'Bau bahan bakar terasa sangat kuat di sekitar mesin.'),
+('G015', 'Oli mesin cepat habis', 'Oli mesin berkurang secara signifikan dalam waktu singkat.'),
+('G016', 'Mesin sulit distarter saat dingin', 'Mesin sulit dihidupkan saat kondisi mesin masih dingin.'),
+('G017', 'Mesin sulit distarter saat panas', 'Mesin sulit dihidupkan saat kondisi mesin sudah panas.'),
+('G018', 'Suara kasar saat mesin hidup', 'Mesin mengeluarkan suara kasar saat dihidupkan.'),
+('G019', 'Indikator oli menyala', 'Lampu indikator oli pada dashboard menyala.'),
+('G020', 'Indikator suhu mesin menyala', 'Lampu indikator suhu mesin pada dashboard menyala.');
 
 -- --------------------------------------------------------
 
@@ -101,16 +103,12 @@ CREATE TABLE `kerusakan_solusi` (
 --
 
 INSERT INTO `kerusakan_solusi` (`kd_kerusakan`, `nama_kerusakan`, `definisi`, `solusi`) VALUES
-('KR01', 'Mesin Tidak Mau Menyala', 'Mesin tidak dapat dinyalakan meskipun starter telah digunakan.', 'Periksa aki, kabel starter, dan sistem pengapian. Ganti komponen yang rusak.'),
-('KR02', 'Mesin Cepat Panas', 'Mesin mengalami overheat dalam waktu singkat setelah dihidupkan.', 'Periksa radiator, sistem pendingin, dan oli mesin. Tambah atau ganti oli jika perlu.'),
-('KR03', 'Mesin Brebet Saat Gas', 'Mesin tersendat-sendat saat gas ditarik.', 'Periksa sistem bahan bakar, karburator, dan filter udara. Bersihkan atau ganti komponen yang kotor.'),
-('KR04', 'Knalpot Berasap Tebal', 'Asap putih atau hitam pekat keluar dari knalpot.', 'Periksa ring piston, seal klep, dan kualitas bahan bakar. Ganti komponen yang rusak.'),
-('KR05', 'Mesin Mati Mendadak', 'Mesin mati tiba-tiba saat kendaraan sedang berjalan.', 'Periksa sistem kelistrikan, CDI, dan kabel busi. Pastikan tidak ada komponen yang longgar.'),
-('KR06', 'Tenaga Mesin Lemah', 'Mesin tidak bertenaga saat melaju di jalan menanjak atau berbeban.', 'Periksa kompresi mesin, filter udara, dan bahan bakar. Lakukan servis rutin.'),
-('KR07', 'Bunyi Tidak Normal', 'Terdengar suara aneh seperti ketukan atau gesekan dari mesin.', 'Periksa rantai kamprat, bearing, dan piston. Lakukan penggantian bila ada kerusakan.'),
-('KR08', 'Mesin Bergetar Kuat', 'Mesin bergetar berlebihan saat kendaraan diam atau melaju.', 'Periksa mounting mesin dan keseimbangan roda. Perbaiki bagian yang longgar atau tidak seimbang.'),
-('KR09', 'Bensin Boros', 'Konsumsi bahan bakar melebihi batas normal.', 'Periksa karburator, injektor, dan tekanan ban. Lakukan penyetelan karburator jika diperlukan.'),
-('KR10', 'Aki Cepat Habis', 'Aki kendaraan cepat habis meski baru diisi ulang.', 'Periksa alternator, regulator, dan kabel kelistrikan. Pastikan tidak ada arus bocor.');
+('K001', 'Mesin Sulit Hidup', 'Mesin tidak dapat dihidupkan dengan mudah, biasanya disebabkan oleh masalah pada sistem pengapian, bahan bakar, atau kompresi mesin.', '1. Periksa sistem pengapian (busi, koil, kabel busi).\n2. Periksa sistem bahan bakar (pompa bahan bakar, karburator, injektor).\n3. Periksa kompresi mesin.'),
+('K002', 'Mesin Overheat', 'Suhu mesin terlalu tinggi dan melebihi batas normal, disebabkan oleh masalah pada sistem pendingin, oli mesin, atau sirkulasi udara.', '1. Periksa sistem pendingin (radiator, selang, cairan pendingin).\r\n2. Ganti oli mesin jika diperlukan.\r\n3. Pastikan sirkulasi udara di sekitar mesin lancar.'),
+('K003', 'Mesin Berisik', 'Mesin mengeluarkan suara tidak normal, biasanya disebabkan oleh masalah pada bagian dalam mesin seperti piston, ring piston, atau bearing.', '1. Periksa kondisi piston dan ring piston.\r\n2. Periksa bearing dan komponen internal mesin.\r\n3. Lakukan perbaikan atau penggantian komponen yang rusak.'),
+('K004', 'Mesin Tidak Bisa Berakselerasi', 'Mesin tidak dapat meningkatkan kecepatan dengan baik, disebabkan oleh masalah pada karburator, sistem bahan bakar, atau transmisi.', '1. Periksa karburator atau sistem injeksi bahan bakar.\r\n2. Periksa sistem transmisi (rantai, gir, kopling).\r\n3. Bersihkan atau ganti komponen yang bermasalah.'),
+('K005', 'Mesin Mogok Saat Digunakan', 'Mesin tiba-tiba mati saat sedang digunakan, biasanya disebabkan oleh masalah pada sistem bahan bakar atau pengapian.', '1. Periksa sistem bahan bakar (pompa bahan bakar, filter bahan bakar).\r\n2. Periksa sistem pengapian (busi, koil, kabel busi).\r\n3. Pastikan tidak ada kebocoran bahan bakar.'),
+('K006', 'Mesin Boros Bahan Bakar', 'Konsumsi bahan bakar berlebihan, disebabkan oleh masalah pada karburator, sistem injeksi, atau kebocoran bahan bakar.', '1. Periksa karburator atau sistem injeksi bahan bakar.\r\n2. Periksa kebocoran bahan bakar.\r\n3. Lakukan penyetelan ulang sistem bahan bakar.');
 
 -- --------------------------------------------------------
 
@@ -149,7 +147,39 @@ INSERT INTO `log` (`id_log`, `isi_log`, `tgl_log`, `id_user`) VALUES
 (17, 'Analisa Hasil admin berhasil dihapus!', '2025-03-14 07:29:06', 1),
 (18, 'Analisa Hasil admin berhasil dihapus!', '2025-03-14 07:29:07', 1),
 (19, 'Analisa Hasil admin berhasil dihapus!', '2025-03-14 07:29:07', 1),
-(20, 'User admin berhasil logout!', '2025-03-14 08:04:34', 1);
+(20, 'User admin berhasil logout!', '2025-03-14 08:04:34', 1),
+(21, 'User admin berhasil login!', '2025-03-16 10:56:13', 1),
+(22, 'User admin berhasil login!', '2025-03-17 14:22:47', 1),
+(23, 'Gejala G021 berhasil ditambahkan!', '2025-03-17 14:32:13', 1),
+(24, 'Gejala G021 berhasil dihapus!', '2025-03-17 14:32:19', 1),
+(25, 'Gejala G021 berhasil ditambahkan!', '2025-03-17 14:32:26', 1),
+(26, 'Gejala G021 berhasil diubah!', '2025-03-17 14:34:59', 1),
+(27, 'Gejala G021 berhasil dihapus!', '2025-03-17 14:35:04', 1),
+(28, 'User admin berhasil login!', '2025-03-17 15:59:00', 1),
+(29, 'Relasi K001 | G001 berhasil ditambahkan!', '2025-03-17 16:30:27', 1),
+(30, 'Relasi K001 | G001 berhasil diubah!', '2025-03-17 16:40:28', 1),
+(31, 'Relasi K001 | G001 berhasil diubah!', '2025-03-17 16:42:13', 1),
+(32, 'Relasi K001 | G001 berhasil diubah!', '2025-03-17 16:42:28', 1),
+(33, 'Relasi K001 | G001 berhasil diubah!', '2025-03-17 16:42:31', 1),
+(34, 'Relasi K001 | G001 berhasil diubah!', '2025-03-17 16:42:34', 1),
+(35, 'Relasi berhasil dihapus!', '2025-03-17 18:54:56', 1),
+(36, 'Relasi K002 | G002 berhasil ditambahkan!', '2025-03-17 18:55:02', 1),
+(37, 'Relasi K002 | G002 berhasil diubah!', '2025-03-17 18:55:06', 1),
+(38, 'Relasi berhasil dihapus!', '2025-03-17 18:55:08', 1),
+(39, 'User admin berhasil logout!', '2025-03-17 19:04:02', 1),
+(40, 'User andri berhasil ditambahkan!', '2025-03-17 19:04:21', 3),
+(41, 'User andri berhasil login!', '2025-03-17 19:04:25', 3),
+(42, 'User admin berhasil login!', '2025-03-17 19:48:40', 1),
+(43, 'User admin berhasil login!', '2025-03-23 18:36:51', 1),
+(44, 'User admin berhasil login!', '2025-03-30 08:00:29', 1),
+(45, 'User admin berhasil login!', '2025-04-01 06:17:33', 1),
+(46, 'Analisa Hasil Andri Firman Saputra berhasil dihapus!', '2025-04-01 07:56:49', 1),
+(47, 'Analisa Hasil Andri Firman Saputra berhasil dihapus!', '2025-04-01 07:56:52', 1),
+(48, 'Analisa Hasil Andri Firman Saputra berhasil dihapus!', '2025-04-01 07:56:59', 1),
+(49, 'Analisa Hasil admin berhasil dihapus!', '2025-04-01 08:51:53', 1),
+(50, 'Analisa Hasil Andri Firman Saputra berhasil dihapus!', '2025-04-01 08:51:54', 1),
+(51, 'Analisa Hasil Andri Firman Saputra berhasil dihapus!', '2025-04-01 09:02:53', 1),
+(52, 'Analisa Hasil admin berhasil dihapus!', '2025-04-01 09:27:14', 1);
 
 -- --------------------------------------------------------
 
@@ -173,6 +203,33 @@ INSERT INTO `mekanik` (`id_mekanik`, `nama_mekanik`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Struktur dari tabel `perhitungan`
+--
+
+CREATE TABLE `perhitungan` (
+  `id_perhitungan` int(11) NOT NULL,
+  `kd_gejala` char(4) NOT NULL,
+  `bobot` float NOT NULL,
+  `id_hasil` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `perhitungan`
+--
+
+INSERT INTO `perhitungan` (`id_perhitungan`, `kd_gejala`, `bobot`, `id_hasil`) VALUES
+(1, 'G001', 1, 1),
+(2, 'G002', 3, 1),
+(3, 'G003', 3, 1),
+(4, 'G006', 5, 1),
+(9, 'G002', 3, 4),
+(10, 'G019', 0, 4),
+(11, 'G020', 0, 4),
+(12, 'G017', 5, 6);
+
+-- --------------------------------------------------------
+
+--
 -- Struktur dari tabel `relasi`
 --
 
@@ -180,6 +237,7 @@ CREATE TABLE `relasi` (
   `id_relasi` int(4) NOT NULL,
   `kd_gejala` char(4) NOT NULL,
   `kd_kerusakan` char(4) NOT NULL,
+  `jenis_gejala` enum('Ringan','Sedang','Berat') NOT NULL,
   `bobot` float NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
@@ -187,136 +245,25 @@ CREATE TABLE `relasi` (
 -- Dumping data untuk tabel `relasi`
 --
 
-INSERT INTO `relasi` (`id_relasi`, `kd_gejala`, `kd_kerusakan`, `bobot`) VALUES
-(1, 'G03', 'P01', 0.85),
-(2, 'G20', 'P01', 0.4),
-(3, 'G16', 'P01', 0.4),
-(4, 'G15', 'P01', 0.4),
-(5, 'G21', 'P01', 0.25),
-(6, 'G19', 'P01', 0.35),
-(7, 'G22', 'P01', 0.25),
-(8, 'G02', 'P02', 0.9),
-(9, 'G04', 'P02', 0.5),
-(10, 'G20', 'P02', 0.45),
-(11, 'G17', 'P02', 0.4),
-(12, 'G21', 'P02', 0.35),
-(14, 'G22', 'P02', 0.35),
-(15, 'G06', 'P03', 0.8),
-(16, 'G10', 'P03', 0.7),
-(17, 'G11', 'P03', 0.6),
-(18, 'G14', 'P03', 0.5),
-(19, 'G04', 'P03', 0.4),
-(20, 'G16', 'P03', 0.35),
-(21, 'G22', 'P03', 0.3),
-(28, 'G07', 'P05', 0.8),
-(27, 'G22', 'P04', 0.2),
-(26, 'G20', 'P04', 0.35),
-(25, 'G19', 'P04', 0.4),
-(24, 'G12', 'P04', 0.6),
-(22, 'G05', 'P04', 0.85),
-(23, 'G08', 'P04', 0.7),
-(29, 'G09', 'P05', 0.7),
-(30, 'G13', 'P05', 0.6),
-(31, 'G17', 'P05', 0.4),
-(32, 'G18', 'P05', 0.35),
-(33, 'G21', 'P05', 0.3),
-(34, 'G22', 'P05', 0.3),
-(35, 'G01', 'P06', 0.9),
-(36, 'G04', 'P06', 0.85),
-(37, 'G15', 'P06', 0.5),
-(38, 'G18', 'P06', 0.4),
-(43, 'G16', 'P07', 0.2),
-(45, 'G24', 'P07', 0.7),
-(46, 'G25', 'P07', 0.7),
-(44, 'NULL', 'P07', 0.6),
-(48, 'G23', 'P07', 0.6),
-(49, 'G01', 'KR01', 0.9),
-(50, 'G18', 'KR01', 0.8),
-(51, 'G02', 'KR02', 0.85),
-(52, 'G13', 'KR02', 0.8),
-(53, 'G17', 'KR02', 0.75),
-(54, 'G03', 'KR03', 0.7),
-(55, 'G16', 'KR03', 0.6),
-(56, 'G04', 'KR04', 0.9),
-(57, 'G11', 'KR04', 0.8),
-(58, 'G12', 'KR04', 0.85),
-(59, 'G05', 'KR05', 0.85),
-(60, 'G20', 'KR05', 0.8),
-(61, 'G06', 'KR06', 0.8),
-(62, 'G14', 'KR06', 0.7),
-(63, 'G07', 'KR07', 0.7),
-(64, 'G15', 'KR07', 0.75),
-(65, 'G08', 'KR08', 0.75),
-(66, 'G09', 'KR09', 0.65),
-(67, 'G10', 'KR10', 0.8),
-(68, 'G19', 'KR10', 0.75);
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `tmp_analisa`
---
-
-CREATE TABLE `tmp_analisa` (
-  `noip` varchar(30) NOT NULL,
-  `kd_kerusakan` char(4) NOT NULL,
-  `kd_gejala` char(4) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `tmp_gejala`
---
-
-CREATE TABLE `tmp_gejala` (
-  `noip` int(3) NOT NULL,
-  `kd_gejala` char(4) NOT NULL,
-  `bobot` float NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
-
---
--- Dumping data untuk tabel `tmp_gejala`
---
-
-INSERT INTO `tmp_gejala` (`noip`, `kd_gejala`, `bobot`) VALUES
-(14, 'G04', 0),
-(15, 'G07', 0);
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `tmp_kerusakan`
---
-
-CREATE TABLE `tmp_kerusakan` (
-  `noip` varchar(30) NOT NULL,
-  `kd_kerusakan` char(4) NOT NULL,
-  `nilai` double NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
-
---
--- Dumping data untuk tabel `tmp_kerusakan`
---
-
-INSERT INTO `tmp_kerusakan` (`noip`, `kd_kerusakan`, `nilai`) VALUES
-('', 'KR01', 0),
-('', 'KR02', 0),
-('', 'KR03', 0),
-('', 'KR04', 0.35294117482063),
-('', 'KR05', 0),
-('', 'KR06', 0),
-('', 'KR07', 0.48275862465857),
-('', 'KR08', 0),
-('', 'KR09', 0),
-('', 'KR10', 0),
-('', 'P01', 0),
-('', 'P02', 0.16949152782093),
-('', 'P03', 0.10958904002213),
-('', 'P04', 0),
-('', 'P05', 0.23188405476606),
-('', 'P06', 0.32075471625968),
-('', 'P07', 0);
+INSERT INTO `relasi` (`id_relasi`, `kd_gejala`, `kd_kerusakan`, `jenis_gejala`, `bobot`) VALUES
+(1, 'G001', 'K001', 'Ringan', 1),
+(2, 'G002', 'K001', 'Sedang', 3),
+(3, 'G003', 'K001', 'Sedang', 3),
+(4, 'G004', 'K002', 'Sedang', 3),
+(5, 'G005', 'K002', 'Sedang', 3),
+(6, 'G006', 'K002', 'Berat', 5),
+(7, 'G007', 'K003', 'Sedang', 3),
+(8, 'G008', 'K003', 'Sedang', 3),
+(9, 'G009', 'K003', 'Berat', 5),
+(10, 'G010', 'K004', 'Sedang', 3),
+(11, 'G011', 'K004', 'Sedang', 3),
+(12, 'G012', 'K004', 'Berat', 5),
+(13, 'G005', 'K005', 'Sedang', 3),
+(14, 'G016', 'K005', 'Sedang', 3),
+(15, 'G017', 'K005', 'Berat', 5),
+(16, 'G013', 'K006', 'Sedang', 3),
+(17, 'G014', 'K006', 'Sedang', 3),
+(18, 'G015', 'K006', 'Berat', 5);
 
 -- --------------------------------------------------------
 
@@ -343,7 +290,7 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`id_user`, `username`, `password`, `jabatan`, `nama`, `jenis_kelamin`, `tanggal_lahir`, `alamat`, `foto`, `dibuat_pada`) VALUES
 (1, 'admin', '$2y$10$PDN4Md5jfPRsvJ5DJyJ.r.Bcf6mMSG.g5BBZaivJEd6padJYBerky', 'admin', 'admin', 'laki-laki', '2002-01-29', 'admin', 'default.jpg', '2025-02-14 07:43:47'),
-(2, 'andri123', '$2y$10$jbGxUJnFFliRobf4.ekOLOzY5L3Hq0LIf45taqnadRsg/EZYvr56y', 'pelanggan', 'Andri Firman Saputra', 'laki-laki', '2002-01-29', 'Pocis', 'avatar.png', '2025-02-14 07:47:14');
+(3, 'andri', '$2y$10$.PnL35g9sywNDb33oVzEW.yGcFtSzQ66.sA7QJi2bNVFHBpTcVWya', 'pelanggan', 'Andri Firman Saputra', 'laki-laki', '2002-01-29', 'Jl. AMD Babakan Pocis', 'avatar.png', '2025-03-17 19:04:21');
 
 --
 -- Indexes for dumped tables
@@ -353,7 +300,7 @@ INSERT INTO `user` (`id_user`, `username`, `password`, `jabatan`, `nama`, `jenis
 -- Indeks untuk tabel `analisa_hasil`
 --
 ALTER TABLE `analisa_hasil`
-  ADD PRIMARY KEY (`id`),
+  ADD PRIMARY KEY (`id_hasil`),
   ADD KEY `id_user` (`id_user`),
   ADD KEY `id_mekanik` (`id_mekanik`);
 
@@ -383,32 +330,19 @@ ALTER TABLE `mekanik`
   ADD PRIMARY KEY (`id_mekanik`);
 
 --
+-- Indeks untuk tabel `perhitungan`
+--
+ALTER TABLE `perhitungan`
+  ADD PRIMARY KEY (`id_perhitungan`),
+  ADD KEY `kd_gejala` (`kd_gejala`),
+  ADD KEY `id_hasil` (`id_hasil`);
+
+--
 -- Indeks untuk tabel `relasi`
 --
 ALTER TABLE `relasi`
   ADD PRIMARY KEY (`id_relasi`),
   ADD KEY `kd_gejala` (`kd_gejala`),
-  ADD KEY `kd_kerusakan` (`kd_kerusakan`);
-
---
--- Indeks untuk tabel `tmp_analisa`
---
-ALTER TABLE `tmp_analisa`
-  ADD PRIMARY KEY (`noip`),
-  ADD KEY `kd_kerusakan` (`kd_kerusakan`),
-  ADD KEY `kd_gejala` (`kd_gejala`);
-
---
--- Indeks untuk tabel `tmp_gejala`
---
-ALTER TABLE `tmp_gejala`
-  ADD PRIMARY KEY (`noip`),
-  ADD KEY `kd_gejala` (`kd_gejala`);
-
---
--- Indeks untuk tabel `tmp_kerusakan`
---
-ALTER TABLE `tmp_kerusakan`
   ADD KEY `kd_kerusakan` (`kd_kerusakan`);
 
 --
@@ -425,13 +359,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT untuk tabel `analisa_hasil`
 --
 ALTER TABLE `analisa_hasil`
-  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_hasil` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT untuk tabel `log`
 --
 ALTER TABLE `log`
-  MODIFY `id_log` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id_log` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT untuk tabel `mekanik`
@@ -440,22 +374,22 @@ ALTER TABLE `mekanik`
   MODIFY `id_mekanik` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT untuk tabel `perhitungan`
+--
+ALTER TABLE `perhitungan`
+  MODIFY `id_perhitungan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
 -- AUTO_INCREMENT untuk tabel `relasi`
 --
 ALTER TABLE `relasi`
-  MODIFY `id_relasi` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
-
---
--- AUTO_INCREMENT untuk tabel `tmp_gejala`
---
-ALTER TABLE `tmp_gejala`
-  MODIFY `noip` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id_relasi` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT untuk tabel `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

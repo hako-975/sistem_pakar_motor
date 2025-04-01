@@ -34,8 +34,9 @@
     <?php 
         if (isset($_POST['btnUbahRelasi'])) {
             $bobot = htmlspecialchars($_POST['bobot']);
+            $jenis_gejala = htmlspecialchars($_POST['jenis_gejala']);
 
-            $update_relasi = mysqli_query($conn, "UPDATE relasi SET bobot = '$bobot' WHERE id_relasi = '$id_relasi'");
+            $update_relasi = mysqli_query($conn, "UPDATE relasi SET bobot = '$bobot', jenis_gejala = '$jenis_gejala' WHERE id_relasi = '$id_relasi'");
 
             if ($update_relasi) {
                 $log_berhasil = mysqli_query($conn, "INSERT INTO log VALUES ('', 'Relasi $kd_kerusakan | $kd_gejala berhasil diubah!', CURRENT_TIMESTAMP(), " . $dataUser['id_user'] . ")");
@@ -112,6 +113,28 @@
                                             <label for="kd_gejala" class="form-label">Gejala</label>
                                             <select style="cursor: not-allowed;" disabled class="form-select" id="kd_gejala" name="kd_gejala">
                                                 <option value="<?= $data_relasi['kd_gejala']; ?>"><?= $data_relasi['kd_gejala']; ?> | <?= $data_relasi['gejala']; ?></option>
+                                            </select>
+                                        </div>
+                                        <div class="mb-3"> 
+                                            <label for="jenis_gejala" class="form-label">Jenis Gejala</label>
+                                            <select class="form-select" id="jenis_gejala" name="jenis_gejala">
+                                                <?php if ($data_relasi['jenis_gejala'] == 'Ringan'): ?>
+                                                    <option value="Ringan">Ringan</option>
+                                                    <option value="Sedang">Sedang</option>
+                                                    <option value="Berat">Berat</option>
+                                                <?php elseif ($data_relasi['jenis_gejala'] == 'Sedang'): ?>
+                                                    <option value="Sedang">Sedang</option>
+                                                    <option value="Ringan">Ringan</option>
+                                                    <option value="Berat">Berat</option>
+                                                <?php elseif ($data_relasi['jenis_gejala'] == 'Berat'): ?>
+                                                    <option value="Berat">Berat</option>
+                                                    <option value="Ringan">Ringan</option>
+                                                    <option value="Sedang">Sedang</option>
+                                                <?php else: ?>
+                                                    <option value="Ringan">Ringan</option>
+                                                    <option value="Sedang">Sedang</option>
+                                                    <option value="Berat">Berat</option>
+                                                <?php endif ?>
                                             </select>
                                         </div>
                                         <div class="mb-3"> 

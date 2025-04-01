@@ -6,13 +6,25 @@ if (!isset($_SESSION['id_user'])) {
     exit;
 }
 
-$hasil = mysqli_query($conn, "SELECT *, hasil_topsis.dibuat_pada as dibuat FROM hasil_topsis INNER JOIN siswa ON hasil_topsis.id_siswa = siswa.id_siswa INNER JOIN jurusan ON hasil_topsis.id_jurusan = jurusan.id_jurusan ORDER BY dibuat desc");
+$id_user = $dataUser['id_user'];
+
+if ($dataUser['jabatan'] == 'admin') {
+    $hasil_user = mysqli_query($conn, "SELECT * FROM analisa_hasil INNER JOIN kerusakan_solusi ON analisa_hasil.kd_kerusakan = kerusakan_solusi.kd_kerusakan INNER JOIN user ON analisa_hasil.id_user = user.id_user LEFT JOIN mekanik ON analisa_hasil.id_mekanik = mekanik.id_mekanik ORDER BY analisa_hasil.id_hasil");
+} else {
+    $hasil_user = mysqli_query($conn, "SELECT * FROM analisa_hasil INNER JOIN kerusakan_solusi ON analisa_hasil.kd_kerusakan = kerusakan_solusi.kd_kerusakan INNER JOIN user ON analisa_hasil.id_user = user.id_user LEFT JOIN mekanik ON analisa_hasil.id_mekanik = mekanik.id_mekanik WHERE user.id_user = '$id_user'");
+}
 
 if (isset($_GET)) {
     if (isset($_GET['dari_tanggal'])) {
         $dari_tanggal = $_GET['dari_tanggal'];
         $sampai_tanggal = $_GET['sampai_tanggal'];
-        $hasil = mysqli_query($conn, "SELECT *, hasil_topsis.dibuat_pada as dibuat FROM hasil_topsis INNER JOIN siswa ON hasil_topsis.id_siswa = siswa.id_siswa INNER JOIN jurusan ON hasil_topsis.id_jurusan = jurusan.id_jurusan WHERE hasil_topsis.dibuat_pada BETWEEN '$dari_tanggal' AND '$sampai_tanggal' ORDER BY hasil_topsis.dibuat_pada desc");
+        if ($dataUser['jabatan'] == 'admin') {
+            $hasil_user = mysqli_query($conn, "SELECT * FROM analisa_hasil INNER JOIN kerusakan_solusi ON analisa_hasil.kd_kerusakan = kerusakan_solusi.kd_kerusakan INNER JOIN user ON analisa_hasil.id_user = user.id_user LEFT JOIN mekanik ON analisa_hasil.id_mekanik = mekanik.id_mekanik WHERE analisa_hasil.tanggal BETWEEN '$dari_tanggal' AND '$sampai_tanggal' ORDER BY analisa_hasil.id_hasil");
+
+        } else {
+
+            $hasil_user = mysqli_query($conn, "SELECT * FROM analisa_hasil INNER JOIN kerusakan_solusi ON analisa_hasil.kd_kerusakan = kerusakan_solusi.kd_kerusakan INNER JOIN user ON analisa_hasil.id_user = user.id_user LEFT JOIN mekanik ON analisa_hasil.id_mekanik = mekanik.id_mekanik WHERE analisa_hasil.tanggal BETWEEN '$dari_tanggal' AND '$sampai_tanggal' AND user.id_user = '$id_user' ORDER BY analisa_hasil.id_hasil");
+        }
     }
 }
 
@@ -21,7 +33,7 @@ if (isset($_GET)) {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Print Laporan</title>
+    <title>Laporan Hasil Diagnosa Mesin - Dari Tanggal: <?= date('d-m-Y', strtotime($dari_tanggal)); ?> Sampai Tanggal: <?= date('d-m-Y', strtotime($sampai_tanggal)); ?></title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -61,7 +73,7 @@ if (isset($_GET)) {
     }
 ?>
     <div class="print-container">
-        <h2 class="text-center">Laporan Hasil SPK Jurusan</h2>
+        <h2 class="text-center">Laporan Hasil Diagnosa Mesin</h2>
         <?php if (isset($_GET['dari_tanggal'])) : ?>
             <p class="text-right">Dari Tanggal: <?= date('d-m-Y', strtotime($dari_tanggal)); ?> Sampai Tanggal: <?= date('d-m-Y', strtotime($sampai_tanggal)); ?></p>
         <?php endif ?>
@@ -69,21 +81,29 @@ if (isset($_GET)) {
             <thead>
                 <tr>
                     <th>No.</th>
-                    <th>Nama Siswa</th>
-                    <th>Jurusan</th>
-                    <th>Preferensi Tertinggi</th>
-                    <th>Dibuat Pada</th>
+                    <th class="text-center align-middle">Nama Mekanik</th>
+                    <th class="text-center align-middle">Nama</th>
+                    <th class="text-center align-middle">Jenis Kelamin</th>
+                    <th class="text-center align-middle">Tanggal Lahir</th>
+                    <th class="text-center align-middle">Alamat</th>
+                    <th class="text-center align-middle">Kerusakan</th>
+                    <th class="text-center align-middle">Nilai Kemiripan</th>
+                    <th class="text-center align-middle">Tanggal Diagnosa</th>
                 </tr>
             </thead>
             <tbody>
                 <?php $i = 1; ?>
-                <?php foreach ($hasil as $dh): ?>
+                <?php foreach ($hasil_user as $dhu): ?>
                     <tr>
                         <td class="text-center align-middle"><?= $i++; ?>.</td>
-                        <td class="align-middle text-start"><?= $dh['nama_siswa']; ?></td>
-                        <td class="align-middle text-start"><?= $dh['nama_jurusan']; ?></td>
-                        <td class="align-middle text-start"><?= $dh['preferensi_tertinggi']; ?></td>
-                        <td class="align-middle text-start"><?= date('d-m-Y, H:i \W\I\B', strtotime($dh['dibuat'])); ?></td>
+                        <td class="align-middle"><?= $dhu['nama_mekanik']; ?></td>
+                        <td class="align-middle"><?= $dhu['nama']; ?></td>
+                        <td class="align-middle"><?= $dhu['jenis_kelamin']; ?></td>
+                        <td class="align-middle"><?= $dhu['tanggal_lahir']; ?></td>
+                        <td class="align-middle"><?= $dhu['alamat']; ?></td>
+                        <td class="align-middle"><?= $dhu['nama_kerusakan']; ?> (<?= $dhu['kd_kerusakan']; ?>)</td>
+                        <td class="align-middle"><?= round($dhu['nilai_akhir'], 2); ?>%</td>
+                        <td class="align-middle"><?= date('d-m-Y, H:i \W\I\B', strtotime($dhu['tanggal'])); ?></td>
                     </tr>
                 <?php endforeach ?>
             </tbody>

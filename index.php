@@ -7,7 +7,13 @@
     }
 
 
-    $chart_diagnosa = mysqli_query($conn, "SELECT tanggal, COUNT(id) as jumlah FROM analisa_hasil GROUP BY tanggal ORDER BY tanggal ASC");
+    $chart_diagnosa = mysqli_query($conn, "
+        SELECT tanggal, DATE_FORMAT(tanggal, '%d-%m-%Y') AS tgl, COUNT(id_hasil) AS jumlah
+        FROM analisa_hasil
+        GROUP BY tgl
+        ORDER BY STR_TO_DATE(tgl, '%d-%m-%Y') ASC
+    ");
+
 
     $data_diagnosa = [];
     while ($row = mysqli_fetch_assoc($chart_diagnosa)) {
@@ -62,7 +68,11 @@
                                     <h4 class="m-0">Jumlah Diagnosa</h4>
                                 </div>
                                 <div class="card-body">
-                                    <canvas id="diagnosaChart" width="100%"></canvas>
+                                    <?php if (mysqli_num_rows($chart_diagnosa) > 0): ?>
+                                        <canvas id="diagnosaChart" width="100%" height="300"></canvas>
+                                    <?php else: ?>
+                                        Belum ada data
+                                    <?php endif ?>
                                 </div>
                             </div>
                         </div>
@@ -128,7 +138,8 @@
                             stepSize: 1 // Force integer steps
                         }
                     }
-                }
+                },
+                maintainAspectRatio: false
             }
         });
     });

@@ -72,12 +72,13 @@
                                                         <td>
                                                             <table width="600" class="table table-bordered">
                                                                 <?php
-                                                                    $relasi_2 = mysqli_query($conn, "SELECT relasi.id_relasi, relasi.kd_gejala, relasi.bobot, gejala.gejala FROM relasi JOIN gejala ON gejala.kd_gejala = relasi.kd_gejala WHERE relasi.kd_kerusakan = '$id_kerusakan'"); 
+                                                                    $relasi_2 = mysqli_query($conn, "SELECT relasi.id_relasi, relasi.kd_gejala, relasi.bobot, relasi.jenis_gejala, gejala.gejala FROM relasi JOIN gejala ON gejala.kd_gejala = relasi.kd_gejala WHERE relasi.kd_kerusakan = '$id_kerusakan'"); 
                                                                 ?>
                                                                 <?php foreach ($relasi_2 as $dr2): ?>
                                                                     <tr>
                                                                         <td class="align-middle text-center" width="50"><?= $dr2['kd_gejala']; ?></td>
                                                                         <td class="align-middle" width="300"><?= $dr2['gejala']; ?></td>
+                                                                        <td class="align-middle" width="300"><?= $dr2['jenis_gejala']; ?></td>
                                                                         <td class="align-middle text-center" width="50"><?= $dr2['bobot'] ?></td>
                                                                         <?php if ($dataUser['jabatan'] == 'admin'): ?>
                                                                             <td class="align-middle text-center" width="150">

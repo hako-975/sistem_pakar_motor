@@ -43,8 +43,9 @@
             }
 
             $gejala = htmlspecialchars($_POST['gejala']);
+            $deskripsi_gejala = htmlspecialchars($_POST['deskripsi_gejala']);
 
-            $insert_gejala = mysqli_query($conn, "INSERT INTO gejala VALUES ('$kd_gejala', '$gejala')");
+            $insert_gejala = mysqli_query($conn, "INSERT INTO gejala VALUES ('$kd_gejala', '$gejala', '$deskripsi_gejala')");
 
             if ($insert_gejala) {
                 $log_berhasil = mysqli_query($conn, "INSERT INTO log VALUES ('', 'Gejala $kd_gejala berhasil ditambahkan!', CURRENT_TIMESTAMP(), " . $dataUser['id_user'] . ")");
@@ -118,6 +119,10 @@
                                         <div class="mb-3"> 
                                             <label for="gejala" class="form-label">Gejala</label> 
                                             <textarea class="form-control" id="gejala" name="gejala" required></textarea>
+                                        </div>
+                                        <div class="mb-3"> 
+                                            <label for="deskripsi_gejala" class="form-label">Deskripsi Gejala</label> 
+                                            <textarea class="form-control" id="deskripsi_gejala" name="deskripsi_gejala" required></textarea>
                                         </div>
                                     </div> 
                                     <div class="card-footer pt-3">

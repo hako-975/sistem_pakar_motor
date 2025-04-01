@@ -57,6 +57,7 @@
                                                 <tr>
                                                     <th class="text-center align-middle">Kode Gejala</th>
                                                     <th class="text-center align-middle">Gejala</th>
+                                                    <th class="text-center align-middle">Deksripsi Gejala</th>
                                                     <?php if ($dataUser['jabatan'] == 'admin'): ?>
                                                         <th class="text-center align-middle">Aksi</th>
                                                     <?php endif ?>
@@ -68,6 +69,7 @@
                                                     <tr>
                                                         <td class="text-center align-middle"><?= $dks['kd_gejala']; ?></td>
                                                         <td class="align-middle"><?= $dks['gejala']; ?></td>
+                                                        <td class="align-middle"><?= $dks['deskripsi_gejala']; ?></td>
                                                         <?php if ($dataUser['jabatan'] == 'admin'): ?>
                                                             <td class="text-center align-middle">
                                                                 <a href="ubah_gejala.php?kd_gejala=<?= $dks['kd_gejala']; ?>" class="m-1 btn btn-success"><i class="fas fa-fw fa-edit"></i> Ubah</a>

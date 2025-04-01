@@ -30,6 +30,7 @@
         if (isset($_POST['btnTambahRelasi'])) {
             $kd_kerusakan = htmlspecialchars($_POST['kd_kerusakan']);
             $kd_gejala = htmlspecialchars($_POST['kd_gejala']);
+            $jenis_gejala = htmlspecialchars($_POST['jenis_gejala']);
             $bobot = htmlspecialchars($_POST['bobot']);
 
             if ($kd_kerusakan == '0') {
@@ -92,7 +93,7 @@
             $gejala = mysqli_query($conn, "SELECT * FROM gejala WHERE kd_gejala = '$kd_gejala'");
 
             while ($data_tmp = mysqli_fetch_array($gejala)) {
-                $sql = "INSERT INTO relasi (kd_kerusakan, kd_gejala, bobot) VALUES ('$kd_kerusakan', '$kd_gejala', '$bobot')"; 
+                $sql = "INSERT INTO relasi (kd_kerusakan, kd_gejala, jenis_gejala, bobot) VALUES ('$kd_kerusakan', '$kd_gejala', '$jenis_gejala', '$bobot')"; 
             }
 
             $insert_relasi = mysqli_query($conn, $sql);
@@ -181,8 +182,16 @@
                                             </select>
                                         </div>
                                         <div class="mb-3"> 
+                                            <label for="jenis_gejala" class="form-label">Jenis Gejala</label>
+                                            <select class="form-select" id="jenis_gejala" name="jenis_gejala">
+                                                <option value="Ringan">Ringan</option>
+                                                <option value="Sedang">Sedang</option>
+                                                <option value="Berat">Berat</option>
+                                            </select>
+                                        </div>
+                                        <div class="mb-3"> 
                                             <label for="bobot" class="form-label">Bobot</label>
-                                            <input type="number" step="0.01" class="form-control" id="bobot" name="bobot" required>
+                                            <input type="number" step="1" class="form-control" id="bobot" name="bobot" required>
                                         </div>
                                     </div> 
                                     <div class="card-footer pt-3">

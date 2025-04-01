@@ -51,8 +51,8 @@
                     </a>
                 </li>
                 <li class="nav-item"> 
-                    <a href="laporan_user.php" class="nav-link text-dark <?= ($_SERVER['REQUEST_URI'] == '/sistem_pakar_motor/laporan_user.php') ? 'active' : ''; ?>"> <i class="nav-icon fas fa-fw fa-file-alt"></i>
-                        <p>Laporan User</p>
+                    <a href="hasil_diagnosa.php" class="nav-link text-dark <?= ($_SERVER['REQUEST_URI'] == '/sistem_pakar_motor/hasil_diagnosa.php') ? 'active' : ''; ?>"> <i class="nav-icon fas fa-fw fa-user-check"></i>
+                        <p>Hasil Diagnosa</p>
                     </a>
                 </li>
                 <?php if ($dataUser['jabatan'] == 'admin'): ?>
