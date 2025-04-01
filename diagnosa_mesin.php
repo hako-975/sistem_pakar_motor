@@ -23,7 +23,11 @@
     <?php 
         if (isset($_POST['btnTambahDiagnosaMesin'])) {
             $id_mekanik = $_POST['id_mekanik'];
-            $id_user = $_POST['id_user'];
+            if ($dataUser['jabatan'] == 'admin') {
+                $id_user = $_POST['id_user'];
+            } else {
+                $id_user = $dataUser['id_user'];
+            }
 
             if (!isset($_POST['gejala']) || empty($_POST['gejala'])) {
                 echo "
@@ -51,11 +55,18 @@
             $total_bobot_user = 0;
 
             // Hitung total bobot dari gejala yang dipilih
-            $query_bobot = mysqli_query($conn, "SELECT SUM(bobot) as total FROM relasi WHERE kd_gejala IN ('" . implode("','", $gejala_terpilih) . "')");
-            if ($row = mysqli_fetch_assoc($query_bobot)) {
-                $total_bobot_user = $row['total'];
+            $total_bobot_user = 0;
+            foreach ($gejala_terpilih as $kd_gejala) {
+                $result = mysqli_query($conn, "SELECT bobot FROM relasi WHERE kd_gejala = '$kd_gejala'");
+                if ($result) {
+                    $row = mysqli_fetch_assoc($result);
+                    if ($row) {
+                        $bobot = $row['bobot'];
+                        $total_bobot_user += $bobot;
+                    }
+                }
             }
-
+           
             // ================================
             // Proses Perhitungan CBR
             // ================================
@@ -79,10 +90,18 @@
 
                 // Simpan detail ke tabel perhitungan
                 foreach ($gejala_terpilih as $kd_gejala) {
-                    $bobot = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM relasi WHERE kd_gejala = '$kd_gejala'"))['bobot'];
-
-                    mysqli_query($conn, "INSERT INTO perhitungan (id_hasil, kd_gejala, bobot) 
-                                         VALUES ('$id_hasil', '$kd_gejala', '$bobot')");
+                    $result = mysqli_query($conn, "SELECT * FROM relasi WHERE kd_gejala = '$kd_gejala'");
+                    if ($result) {
+                        $row = mysqli_fetch_assoc($result);
+                        if ($row) {
+                            $bobot = $row['bobot'];
+                            mysqli_query($conn, "INSERT INTO perhitungan (id_hasil, kd_gejala, bobot) 
+                                                 VALUES ('$id_hasil', '$kd_gejala', '$bobot')");
+                        } else {
+                            mysqli_query($conn, "INSERT INTO perhitungan (id_hasil, kd_gejala, bobot) 
+                                                 VALUES ('$id_hasil', '$kd_gejala', '0')");
+                        }
+                    }
                 }
 
                 // Update analisa_hasil dengan hasil kerusakan dan nilai kemiripan
@@ -159,15 +178,17 @@
                                                 <?php endforeach ?>
                                             </select>
                                         </div>
-                                        <div class="mb-3"> 
-                                            <label for="id_user" class="form-label">Nama Konsumen</label> 
-                                            <select class="form-select" id="id_user" name="id_user" required>
-                                                <option value="0">--- Nama Konsumen ---</option>
-                                                <?php foreach ($user as $du): ?>
-                                                    <option value="<?= $du['id_user']; ?>"><?= $du['nama']; ?></option>
-                                                <?php endforeach ?>
-                                            </select>
-                                        </div>
+                                        <?php if ($dataUser['jabatan'] == 'admin'): ?>
+                                            <div class="mb-3"> 
+                                                <label for="id_user" class="form-label">Nama Konsumen</label> 
+                                                <select class="form-select" id="id_user" name="id_user" required>
+                                                    <option value="0">--- Nama Konsumen ---</option>
+                                                    <?php foreach ($user as $du): ?>
+                                                        <option value="<?= $du['id_user']; ?>"><?= $du['nama']; ?></option>
+                                                    <?php endforeach ?>
+                                                </select>
+                                            </div>
+                                        <?php endif ?>
                                         <hr>
                                         <h5 class="text-center">Pilih Gejala Yang Dialami</h5>
                                         <h5>Form Konsultasi:</h5>

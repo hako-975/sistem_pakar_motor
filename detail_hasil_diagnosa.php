@@ -83,9 +83,9 @@
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>
-                                        <th>Kode Gejala</th>
-                                        <th>Gejala</th>
-                                        <th>Bobot</th>
+                                        <th class="text-center align-middle">Kode Gejala</th>
+                                        <th class="text-center align-middle">Gejala</th>
+                                        <th class="text-center align-middle">Bobot</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -99,7 +99,7 @@
 
                                     ?>
                                     <tr>
-                                        <td><?= htmlspecialchars($dp['kd_gejala']); ?></td>
+                                        <td class="text-center align-middle"><?= htmlspecialchars($dp['kd_gejala']); ?></td>
                                         <td><?= htmlspecialchars($dp['gejala']); ?></td>
                                         <td><?= htmlspecialchars($dp['bobot']); ?></td>
                                     </tr>

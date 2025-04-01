@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 01 Apr 2025 pada 11.45
+-- Waktu pembuatan: 01 Apr 2025 pada 12.11
 -- Versi server: 10.4.27-MariaDB
 -- Versi PHP: 7.4.33
 
@@ -41,11 +41,16 @@ CREATE TABLE `analisa_hasil` (
 --
 
 INSERT INTO `analisa_hasil` (`id_hasil`, `id_user`, `id_mekanik`, `kd_kerusakan`, `nilai_akhir`, `tanggal`) VALUES
-(1, 3, 3, 'K001', 58.3333, '2025-04-01 16:03:41'),
-(2, 1, 3, NULL, NULL, '2025-04-01 16:26:50'),
-(4, 1, 3, 'K001', 100, '2025-04-01 16:42:25'),
-(5, 1, 2, NULL, NULL, '2025-04-01 16:42:36'),
-(6, 3, 3, 'K005', 100, '2025-04-01 16:42:45');
+(2, 3, 3, 'K001', 50, '2025-04-01 16:59:18'),
+(13, 3, 3, 'K002', 41.6667, '2025-04-01 17:09:55'),
+(4, 3, 3, NULL, NULL, '2025-04-01 17:02:04'),
+(5, 3, 3, NULL, NULL, '2025-04-01 17:03:24'),
+(6, 3, 3, NULL, NULL, '2025-04-01 17:03:53'),
+(7, 3, 3, NULL, NULL, '2025-04-01 17:03:58'),
+(8, 3, 3, NULL, NULL, '2025-04-01 17:07:19'),
+(9, 3, 3, NULL, NULL, '2025-04-01 17:07:30'),
+(10, 3, 3, NULL, NULL, '2025-04-01 17:07:36'),
+(12, 3, 3, NULL, NULL, '2025-04-01 17:07:59');
 
 -- --------------------------------------------------------
 
@@ -179,7 +184,18 @@ INSERT INTO `log` (`id_log`, `isi_log`, `tgl_log`, `id_user`) VALUES
 (49, 'Analisa Hasil admin berhasil dihapus!', '2025-04-01 08:51:53', 1),
 (50, 'Analisa Hasil Andri Firman Saputra berhasil dihapus!', '2025-04-01 08:51:54', 1),
 (51, 'Analisa Hasil Andri Firman Saputra berhasil dihapus!', '2025-04-01 09:02:53', 1),
-(52, 'Analisa Hasil admin berhasil dihapus!', '2025-04-01 09:27:14', 1);
+(52, 'Analisa Hasil admin berhasil dihapus!', '2025-04-01 09:27:14', 1),
+(53, 'Analisa Hasil Andri Firman Saputra berhasil dihapus!', '2025-04-01 09:56:46', 1),
+(54, 'Analisa Hasil admin berhasil dihapus!', '2025-04-01 09:56:48', 1),
+(55, 'Analisa Hasil Andri Firman Saputra berhasil dihapus!', '2025-04-01 09:56:50', 1),
+(56, 'User admin berhasil logout!', '2025-04-01 09:56:58', 1),
+(57, 'User andri berhasil login!', '2025-04-01 09:57:00', 3),
+(58, 'User admin berhasil login!', '2025-04-01 09:58:55', 1),
+(59, 'User andri berhasil logout!', '2025-04-01 10:08:12', 3),
+(60, 'User admin berhasil login!', '2025-04-01 10:08:22', 1),
+(61, 'Analisa Hasil admin berhasil dihapus!', '2025-04-01 10:09:32', 1),
+(62, 'Analisa Hasil Andri Firman Saputra berhasil dihapus!', '2025-04-01 10:09:37', 1),
+(63, 'Analisa Hasil Andri Firman Saputra berhasil dihapus!', '2025-04-01 10:09:43', 1);
 
 -- --------------------------------------------------------
 
@@ -218,14 +234,13 @@ CREATE TABLE `perhitungan` (
 --
 
 INSERT INTO `perhitungan` (`id_perhitungan`, `kd_gejala`, `bobot`, `id_hasil`) VALUES
-(1, 'G001', 1, 1),
-(2, 'G002', 3, 1),
-(3, 'G003', 3, 1),
-(4, 'G006', 5, 1),
-(9, 'G002', 3, 4),
-(10, 'G019', 0, 4),
-(11, 'G020', 0, 4),
-(12, 'G017', 5, 6);
+(3, 'G002', 3, 2),
+(4, 'G008', 3, 2),
+(11, 'G001', 1, 13),
+(12, 'G006', 5, 13),
+(13, 'G011', 3, 13),
+(14, 'G016', 3, 13),
+(15, 'G020', 0, 13);
 
 -- --------------------------------------------------------
 
@@ -359,13 +374,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT untuk tabel `analisa_hasil`
 --
 ALTER TABLE `analisa_hasil`
-  MODIFY `id_hasil` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_hasil` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT untuk tabel `log`
 --
 ALTER TABLE `log`
-  MODIFY `id_log` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `id_log` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 
 --
 -- AUTO_INCREMENT untuk tabel `mekanik`
@@ -377,7 +392,7 @@ ALTER TABLE `mekanik`
 -- AUTO_INCREMENT untuk tabel `perhitungan`
 --
 ALTER TABLE `perhitungan`
-  MODIFY `id_perhitungan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_perhitungan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT untuk tabel `relasi`

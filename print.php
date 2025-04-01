@@ -80,7 +80,7 @@ if (isset($_GET)) {
         <table class="table">
             <thead>
                 <tr>
-                    <th>No.</th>
+                    <th class="text-center align-middle">No.</th>
                     <th class="text-center align-middle">Nama Mekanik</th>
                     <th class="text-center align-middle">Nama</th>
                     <th class="text-center align-middle">Jenis Kelamin</th>

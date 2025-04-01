@@ -6,13 +6,24 @@
         exit;
     }
 
+    $id_user = $dataUser['id_user'];
 
-    $chart_diagnosa = mysqli_query($conn, "
-        SELECT tanggal, DATE_FORMAT(tanggal, '%d-%m-%Y') AS tgl, COUNT(id_hasil) AS jumlah
-        FROM analisa_hasil
-        GROUP BY tgl
-        ORDER BY STR_TO_DATE(tgl, '%d-%m-%Y') ASC
-    ");
+    if ($dataUser['jabatan'] == 'admin') {
+        $chart_diagnosa = mysqli_query($conn, "
+            SELECT tanggal, DATE_FORMAT(tanggal, '%d-%m-%Y') AS tgl, COUNT(id_hasil) AS jumlah
+            FROM analisa_hasil
+            GROUP BY tgl
+            ORDER BY STR_TO_DATE(tgl, '%d-%m-%Y') ASC
+        ");
+    } else {
+        $chart_diagnosa = mysqli_query($conn, "
+            SELECT tanggal, DATE_FORMAT(tanggal, '%d-%m-%Y') AS tgl, COUNT(id_hasil) AS jumlah
+            FROM analisa_hasil WHERE analisa_hasil.id_user = '$id_user'
+            GROUP BY tgl
+            ORDER BY STR_TO_DATE(tgl, '%d-%m-%Y') ASC
+        ");
+    }
+
 
 
     $data_diagnosa = [];
