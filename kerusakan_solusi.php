@@ -71,7 +71,15 @@
                                                         <td class="text-center align-middle"><?= $dks['kd_kerusakan']; ?></td>
                                                         <td class="align-middle"><?= $dks['nama_kerusakan']; ?></td>
                                                         <td class="align-middle"><?= $dks['definisi']; ?></td>
-                                                        <td class="align-middle"><?= $dks['solusi']; ?></td>
+                                                        <td class="align-middle">
+                                                            <?php
+                                                                $solusi = $dks['solusi'];
+                                                                $items = preg_split('/\s*\d+\.\s*/', $solusi, -1, PREG_SPLIT_NO_EMPTY);
+                                                                foreach ($items as $i => $item) {
+                                                                    echo ($i + 1) . '. ' . trim($item) . '<br>';
+                                                                }
+                                                            ?>
+                                                        </td>
                                                         <?php if ($dataUser['jabatan'] == 'admin'): ?>
                                                             <td class="text-center align-middle">
                                                                 <a href="ubah_kerusakan_solusi.php?kd_kerusakan=<?= $dks['kd_kerusakan']; ?>" class="m-1 btn btn-success"><i class="fas fa-fw fa-edit"></i> Ubah</a>

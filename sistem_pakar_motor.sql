@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 01 Apr 2025 pada 12.11
+-- Waktu pembuatan: 07 Apr 2025 pada 21.57
 -- Versi server: 10.4.27-MariaDB
 -- Versi PHP: 7.4.33
 
@@ -195,7 +195,8 @@ INSERT INTO `log` (`id_log`, `isi_log`, `tgl_log`, `id_user`) VALUES
 (60, 'User admin berhasil login!', '2025-04-01 10:08:22', 1),
 (61, 'Analisa Hasil admin berhasil dihapus!', '2025-04-01 10:09:32', 1),
 (62, 'Analisa Hasil Andri Firman Saputra berhasil dihapus!', '2025-04-01 10:09:37', 1),
-(63, 'Analisa Hasil Andri Firman Saputra berhasil dihapus!', '2025-04-01 10:09:43', 1);
+(63, 'Analisa Hasil Andri Firman Saputra berhasil dihapus!', '2025-04-01 10:09:43', 1),
+(64, 'User admin berhasil login!', '2025-04-07 19:50:29', 1);
 
 -- --------------------------------------------------------
 
@@ -380,7 +381,7 @@ ALTER TABLE `analisa_hasil`
 -- AUTO_INCREMENT untuk tabel `log`
 --
 ALTER TABLE `log`
-  MODIFY `id_log` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+  MODIFY `id_log` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 
 --
 -- AUTO_INCREMENT untuk tabel `mekanik`

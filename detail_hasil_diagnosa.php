@@ -58,7 +58,7 @@
                                 $nilai_akhir = $hasil['nilai_akhir'];
 
                                 // Ambil nama kerusakan berdasarkan kd_kerusakan
-                                $query_kerusakan = mysqli_query($conn, "SELECT kd_kerusakan, nama_kerusakan FROM kerusakan_solusi WHERE kd_kerusakan = '$kd_kerusakan'");
+                                $query_kerusakan = mysqli_query($conn, "SELECT * FROM kerusakan_solusi WHERE kd_kerusakan = '$kd_kerusakan'");
                                 $kerusakan = mysqli_fetch_assoc($query_kerusakan);
                                 $nama_kerusakan = $kerusakan['nama_kerusakan'] . ' ('.$kerusakan['kd_kerusakan'].')';
 
@@ -76,8 +76,16 @@
                             <h6><strong>Kerusakan:</strong> <?= $data_analisa_hasil['nama_kerusakan']; ?> (<?= $data_analisa_hasil['kd_kerusakan']; ?>)</h6>
                             <h6><strong>Tanggal Diagnosa:</strong> <?= $data_analisa_hasil['tanggal']; ?></h6>
                             <hr>
-                            <h5><strong>Kerusakan: </strong> <?= $nama_kerusakan; ?></h5>
-                            <h5><strong>Nilai Kemiripan: </strong> <?= round($nilai_akhir, 2); ?>%</h5>
+                            <h5><strong>Kerusakan: </strong> <br> <?= $nama_kerusakan; ?></h5>
+                            <h5><strong>Nilai Kemiripan: </strong> <br> <?= round($nilai_akhir, 2); ?>%</h5>
+                            <h5><strong>Solusi:</strong></h5>
+                            <?php
+                                $solusi = $kerusakan['solusi'];
+                                $items = preg_split('/\s*\d+\.\s*/', $solusi, -1, PREG_SPLIT_NO_EMPTY);
+                                foreach ($items as $i => $item) {
+                                    echo ($i + 1) . '. ' . trim($item) . '<br>';
+                                }
+                            ?>
                             <hr>
                             <h5><strong>Detail Perhitungan:</strong></h5>
                             <table class="table table-bordered">
